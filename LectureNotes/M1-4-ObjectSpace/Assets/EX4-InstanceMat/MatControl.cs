@@ -6,6 +6,7 @@ public class MatControl : MonoBehaviour
 {
     public Material GlobalMaterial = null;
 
+    public int GlobalClampFlag = 0x01;
     public float GlobalClampValue = 0.8f;
     public Color GlobalColor = Color.gray;
 
@@ -29,10 +30,13 @@ public class MatControl : MonoBehaviour
         if (GlobalMaterial != null)  {
             GlobalMaterial.SetFloat("_ClampValue", GlobalClampValue);
             GlobalMaterial.SetColor("_Color", GlobalColor); // Can set variable not via Property
+
+            Shader.SetGlobalInteger("_ClampFlag", GlobalClampFlag);
         }
 
         // Change my own
         MyMaterial.SetFloat("_ClampValue", MyClampValue);
         MyMaterial.SetColor("_Color", MyColor);
+        
     }
 }

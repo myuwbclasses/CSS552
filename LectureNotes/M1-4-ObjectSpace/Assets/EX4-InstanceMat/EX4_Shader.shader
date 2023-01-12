@@ -2,7 +2,7 @@ Shader "Unlit/EX4_Shader"
 {
     Properties
     {
-        _ClampFlag("Clamp Flag (0-no 1-x 2-y 4-z)", Integer) = 0      
+       // _ClampFlag("Clamp Flag (0-no 1-x 2-y 4-z)", Integer) = 0      
             // 0x00 no clamp
             // 0x01 is Clamp X
             // 0x02 is Clamp Y
@@ -46,7 +46,7 @@ Shader "Unlit/EX4_Shader"
                     // backslash says macro continues
                     // AVOID putting anything other than code in a Macro
                     // e.g., I would avoid putting comments in the macro
-                #define CLAMP_THIS(v, flag)             \ 
+                #define CLAMP_THIS(v, flag)             \
                     if (FLAG_IS_SET(flag))              \
                         v = clamp(v, -1, _ClampValue);
 
