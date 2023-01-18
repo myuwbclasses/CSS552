@@ -13,7 +13,7 @@ public partial class MyMesh : MonoBehaviour {
       
     // Use this for initialization
     protected void Start() {
-        transform.localScale = new Vector3(kInitSize, kInitSize, kInitSize);
+        // transform.localScale = new Vector3(kInitSize, kInitSize, kInitSize);
 
         NewResolution = mResolution;
 
