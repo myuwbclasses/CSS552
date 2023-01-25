@@ -12,7 +12,7 @@ Shader "Unlit/Z-Buf-Control"
         ZWrite On  // or Off   https://docs.unity3d.com/Manual/SL-ZWrite.html  
                    // When ZWrite is Off, rendering of this object not writing into Z-Buffer
                    // Drawing order is important in this case!
-        ZTest Always
+        ZTest Less
             // Modes: Less, LEqual, Equal, GEqual, Greater, NotEqual, Always
             // When would Z-test block  https://docs.unity3d.com/Manual/SL-ZTest.html
             // Default is: Less (if Z-values less than, block!)
