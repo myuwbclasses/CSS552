@@ -21,14 +21,14 @@ public partial class CameraManipulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check to make sure mouse position is indeed in the viewport
+        if (!MouseInCameraViewport())
+            return;
+
         UpdateFrustumPosition();
 
         // this will change the rotation
         transform.LookAt(LookAt.transform);
-
-        // Check to make sure mouse position is indeed in the viewport
-        if (!MouseInCameraViewport())
-            return;
 
         if (Input.GetKey(KeyCode.LeftAlt) &&
             (Input.GetMouseButtonDown(0) || (Input.GetMouseButtonDown(1))))
@@ -98,14 +98,15 @@ public partial class CameraManipulation : MonoBehaviour
             transform.localPosition = newCameraPos;
 
             // First way:
-                    // transform.LookAt(LookAt);
+            transform.LookAt(LookAt);
+
             // Second way:
                 // Vector3 v = (LookAt.localPosition - transform.localPosition).normalized;
                 // transform.localRotation = Quaternion.LookRotation(v, Vector3.up);
             // Third way: do everything ourselve!
-                Vector3 v = (LookAt.localPosition - transform.localPosition).normalized;
-                Vector3 w = Vector3.Cross(v, transform.up).normalized;
-                Vector3 u = Vector3.Cross(w, v).normalized;
+                //Vector3 v = (LookAt.localPosition - transform.localPosition).normalized;
+                //Vector3 w = Vector3.Cross(v, transform.up).normalized;
+                //Vector3 u = Vector3.Cross(w, v).normalized;
                 // INTERESTING: 
                 //    chaning the following directions must be done in specific sequence!
                 //    E.g., NONE of the following order works: 
@@ -117,9 +118,9 @@ public partial class CameraManipulation : MonoBehaviour
                 //   Forward-Vector MUST BE set LAST!!: both of the following works!
                 //          Right, Up, Forward
                 //          Up, Right, Forward
-                transform.up = u;
-                transform.right = w;
-                transform.forward = v;
+                //transform.up = u;
+                //transform.right = w;
+                //transform.forward = v;
         }
     }
 
@@ -142,7 +143,7 @@ public partial class CameraManipulation : MonoBehaviour
             Camera[] allCams = Camera.allCameras;
             int i = 0;
             bool inOtherViewport = false;
-            while ((!inOtherViewport) && (i < allCams.Length)) 
+            while ((!inOtherViewport) && (i < allCams.Length) && (allCams[i].targetTexture==null)) 
             {
                 if (c != allCams[i]) {
                     viewportPt = allCams[i].ScreenToViewportPoint(Input.mousePosition);
