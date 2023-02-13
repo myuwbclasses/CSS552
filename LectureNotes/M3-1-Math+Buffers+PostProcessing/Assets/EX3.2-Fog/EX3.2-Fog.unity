@@ -393,15 +393,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 354198794248843da8555877937ee568, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5191443
+      value: -3.38
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 354198794248843da8555877937ee568, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 354198794248843da8555877937ee568, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.35
+      value: -3.89
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 354198794248843da8555877937ee568, type: 3}
       propertyPath: m_LocalRotation.w
@@ -515,8 +515,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841929350}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.23191401, y: 0.31490135, z: -0.07986997, w: 0.91688263}
+  m_LocalPosition: {x: -6.1824894, y: 2.466155, z: -6.6082397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -549,10 +549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2a8988ecec64349b097bf81c9d32d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WCScale: 10
-  N: 9
+  WCScale: 15
+  N: 13.8
   F: 20
-  FogDensity: 1.3
+  FogDensity: 1.6
   FogColor: {r: 1, g: 1, b: 1, a: 1}
   DebugFlag: 0
   FogMat: {fileID: 2100000, guid: 086850ae4911c5540bed7a7f4c65d127, type: 2}

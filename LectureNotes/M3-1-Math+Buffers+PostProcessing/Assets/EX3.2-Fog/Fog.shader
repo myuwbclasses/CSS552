@@ -51,6 +51,11 @@ Shader "Unlit/Fog"
             static const int kShowDebugNear = 1;
             static const int kShowDebugDistance = 2;
             static const int kShowDebugBlend = 4;
+
+            #define CHECK_DEBUG(FLAG, DEBUG_ACTION) {   \
+                if (_flag & FLAG)                       \
+                    c1 = DEBUG_ACTION;                  \
+            }
             
             // https://learn.microsoft.com/en-us/windows/win32/direct3d9/fog-formulas
             float4 frag (v2f fromV) : SV_Target
@@ -62,8 +67,7 @@ Shader "Unlit/Fog"
                 float d = (1-x.r) * _wcScale;
 
                 if (d < _n) {
-                    if (_flag & kShowDebugNear)
-                        c1 = float4(1, 0, 0, 1);
+                    CHECK_DEBUG(kShowDebugNear, float4(1, 0, 0, 1))
                     return c1;  
                 }
 
@@ -71,13 +75,9 @@ Shader "Unlit/Fog"
                 float blend = exp(-_fogDensity * d);
                 c1 = c1 * blend + _fogColor * (1-blend);
 
-                if (_flag & kShowDebugDistance)
-                    c1 = float4(d, d, d, 1);
+                CHECK_DEBUG(kShowDebugDistance, float4(d, d, d, 1))
+                CHECK_DEBUG(kShowDebugBlend, float4(blend, blend, blend, 1))
 
-                if (_flag & kShowDebugBlend)
-                    c1 = float4(blend, blend, blend, 1);
-
-                // return float4(d, d, d, 1.0);
                 return c1;
             }
             ENDCG
