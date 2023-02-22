@@ -49,12 +49,13 @@ Shader "Unlit/ShadowDiffuseShader"
             static const int kShowMapDistanceWithBias = 0x02;
             static const int kShowLightDistance = 0x04;
             static const int kShowShadowInRed = 0x08;
-            static const int kShowMapWC = 0x10;
+            static const int kShowMapWC = 0x20;
+
+            #define V_TO_F4(V) float4(V,V,V,1)
 
             #define DEBUG_SHOW(FLAG, VALUE, SCALE) {        \
                 if (_MapFlag & FLAG) {                      \
-                    float4 c = VALUE * SCALE;               \
-                    return c;                               \
+                    return (VALUE * SCALE);                 \
                 }                                           \
             }
 
@@ -89,33 +90,25 @@ Shader "Unlit/ShadowDiffuseShader"
                 float3 L = _LightPos - worldPos;
                 float distToLight = length(L);
                 L = L / distToLight;  // normalize L
-                float NdotL = dot(i.normal, L);
+                float NdotL = max(dot(i.normal, L), 0);
 
                 // now, we are being illuminated by the light ... 
-                DEBUG_SHOW(kShowLightDistance, distToLight, _DebugDistScale)
-
-                if (NdotL < 0.2) {   // use 0.1 as cut off
-                    // normal is point almost in the same direction as L
-                    // illumination from this light is minimum 
-                    // should not consider shadow for this point
-                    return 0.2 * col; // 
-                }
-                                
+                DEBUG_SHOW(kShowLightDistance, V_TO_F4(distToLight), _DebugDistScale)
                 // now, let's do shadow compuration
                 float4 wcPt = tex2D(_ShadowMap, i.lightNDC);
                 float distFromMap = wcPt.a;  // this is distance
-                DEBUG_SHOW(kShowMapDistance, distFromMap, _DebugDistScale)
-                DEBUG_SHOW(kShowMapWC, wcPt, _DebugDistScale)
-
+                DEBUG_SHOW(kShowMapDistance, V_TO_F4(distFromMap), _DebugDistScale)
+                DEBUG_SHOW(kShowMapWC, wcPt, _DebugDistScale)              
+                
                 distFromMap += _DepthBias;  // push slightly outward to avoid self-shadowing
-                DEBUG_SHOW(kShowMapDistanceWithBias, distFromMap, _DebugDistScale)
-
+                DEBUG_SHOW(kShowMapDistanceWithBias, V_TO_F4(distFromMap), _DebugDistScale)
+                                
                 if (distToLight > distFromMap) { // in shadow!
-                    NdotL *= 0.2;
-                    DEBUG_SHOW(kShowShadowInRed, (1, 0, 0, 1), 0.5)
+                    NdotL *= 0.1;
+                    DEBUG_SHOW(kShowShadowInRed, float4(1, 0, 0, 1), 1)
                 }               
 
-                return col * NdotL;
+                return float4(0.1, 0.1, 0.1, 0) + (col * NdotL);  // so will not be completely black
             }
            
             ENDCG

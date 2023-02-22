@@ -14,7 +14,7 @@ public class ShadowCamControl : MonoBehaviour
         eDebugMapDistanceWithBias = 0x02,
         eDebugLightDistance = 0x04,
         eDebugShowShadowInRed = 0x08,
-        eDebugShowWC = 0x10
+        eDebugShowWC = 0x20
     };
 
     public Shader DepthShader = null;  // Material that computes ShadowMap or DepthMap
