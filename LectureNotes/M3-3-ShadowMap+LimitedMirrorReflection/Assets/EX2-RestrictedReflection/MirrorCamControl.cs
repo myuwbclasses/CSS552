@@ -46,9 +46,6 @@ public class MirrorCamControl : MonoBehaviour
         
         transform.localPosition = p - dist * r;
         transform.LookAt(p);
-
-        //float vFov = Mathf.Atan2(kInitialSize * TheMirror.localScale.y * 0.5f, dist);
-        // GetComponent<Camera>().fieldOfView = 2f * vFov * Mathf.Rad2Deg;
     }
 
     public RenderTexture GetMirrorRT() { return mMirrorRT; }
