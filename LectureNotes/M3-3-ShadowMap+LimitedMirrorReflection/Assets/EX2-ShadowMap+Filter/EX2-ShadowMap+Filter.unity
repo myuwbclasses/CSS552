@@ -482,7 +482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+  - {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,7 +677,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+  - {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -805,7 +805,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+  - {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1001,7 +1001,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 354198794248843da8555877937ee568, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+      objectReference: {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 354198794248843da8555877937ee568, type: 3}
 --- !u!4 &1478811837 stripped
@@ -1092,7 +1092,7 @@ PrefabInstance:
     - target: {fileID: -2416733968201007103, guid: 5267b7d4485754c79b3de8fd6a231dde, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+      objectReference: {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
     - target: {fileID: 100000, guid: 5267b7d4485754c79b3de8fd6a231dde, type: 3}
       propertyPath: m_Name
       value: bunny
@@ -1216,7 +1216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+  - {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   NormalBias: 0.1
   DebugFlag: 0
   DebugDistanceScale: 0.1
-  ShadowMapDiffuse: {fileID: 2100000, guid: 198b1bac08f461e458253381732b55e4, type: 2}
+  ShadowMapDiffuse: {fileID: 2100000, guid: 7d6b816784ec7f64b8231a29f2b55cb0, type: 2}
   ShowDepthTexture: {fileID: 1217120077}
   Analyze: 0
 --- !u!20 &1777785486
