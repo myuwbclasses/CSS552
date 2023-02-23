@@ -10,11 +10,13 @@ public class ShadowCamControl : MonoBehaviour
 {
     public enum DebugShadowMap {
         eDebugOff = 0x0,
+        eFilter3 = 0x40,
+        eFilter5 = 0x80,
+        eFilter9 = 0x100,
+        eFilter15 = 0x200,
         eDebugMapDistance = 0x01,
         eDebugMapDistanceWithBias = 0x02,
-        eDebugLightDistance = 0x04,
-        eDebugShowShadowInRed = 0x08,
-        eDebugShowWC = 0x20
+        eDebugLightDistance = 0x04
     };
 
     public Shader DepthShader = null;  // Material that computes ShadowMap or DepthMap
