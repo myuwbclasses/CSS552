@@ -14,6 +14,7 @@ float4 filterOneRow_##SIZE(float x, float y) {              \
                                                             \
 float4 filter_##SIZE(float2 uv) {                           \
     float4 col = 0;                                         \
+    uv.y = uv.y - (((SIZE-1)/2)*_invHeight);                \
     for (int c = 0; c<SIZE; c++) {                          \
         col += filterOneRow_##SIZE(uv.x, uv.y);             \
         uv.y += _invHeight;                                 \
