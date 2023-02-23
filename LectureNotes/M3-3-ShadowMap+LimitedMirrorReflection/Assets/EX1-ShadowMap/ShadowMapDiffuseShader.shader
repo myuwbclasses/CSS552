@@ -65,6 +65,10 @@ Shader "Unlit/ShadowDiffuseShader"
             {
                 v2f o;
                 float4 p = mul(unity_ObjectToWorld, v.vertex);  // objcet to world
+
+                // For ShadowMap
+                p.xyz = p.xyz + _NormalBias * v.normal; // push the position out of the surface a little
+
                 o.worldPos = p.xyz;  // p.w is 1.0 at this poit
 
                 p = mul(UNITY_MATRIX_V, p);  // To view space
@@ -86,8 +90,8 @@ Shader "Unlit/ShadowDiffuseShader"
                 float4 col = float4(0.9, 0.7, 0.7, 1.0);
                 if ((i.uv.x != 0) && (i.uv.y != 0))
                     col = tex2D(_MainTex, i.uv);
-                float3 worldPos = i.worldPos + _NormalBias * i.normal;  // push the position out of the surface a little
-                float3 L = _LightPos - worldPos;
+                
+                float3 L = _LightPos - i.worldPos;
                 float distToLight = length(L);
                 L = L / distToLight;  // normalize L
                 float NdotL = max(dot(i.normal, L), 0);
