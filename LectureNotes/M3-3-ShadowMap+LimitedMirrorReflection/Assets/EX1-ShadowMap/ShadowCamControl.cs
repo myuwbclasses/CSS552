@@ -16,6 +16,8 @@ public class ShadowCamControl : MonoBehaviour
         eFilter15 = 0x200,
         eDebugMapDistance = 0x01,
         eDebugMapDistanceWithBias = 0x02,
+        eDebugShowShadowInRed = 0x08,
+        eDebugShowMapWC = 0x20,
         eDebugLightDistance = 0x04
     };
 
