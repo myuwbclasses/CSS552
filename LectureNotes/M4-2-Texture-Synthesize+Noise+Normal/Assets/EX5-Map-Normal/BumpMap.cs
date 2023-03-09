@@ -12,12 +12,15 @@ public class BumpMap : MonoBehaviour
         eUseOrgNormalNoColor = 0x08,
         eUseOrgNormalWithColor = 0x10,
         eUsePerturbedNormalNoColor = 0x20,
-        eUsePerturbedNormalWithColor = 0x40,
+        eUsePerturbedNormalWithColor = 0x40
     };
     public Texture2D MainTex = null;
     public Texture2D NormalMapSource = null;
     
-    public float Bumpiness = 1.0f; // typical range between 0 to 2
+    static int kUseMapAsNormal = 0x80;
+    public bool UseMapAsNormal = false;
+    public float BumpinessU = 0.2f; // typical range between - to +
+    public float BumpinessV = 0.2f; // typical range between - to +
     public bool RecomputeNormalMap = false;
     public DebugEnum ShowOptions = DebugEnum.eUseOrgNormalWithColor ;  // 0 is off, 1 is show bump as color, 2 is show normal without color map
     public Material BumpMat = null;
@@ -43,8 +46,13 @@ public class BumpMap : MonoBehaviour
             BumpMat.SetTexture("_NormalMap", mNormalMap);
             RecomputeNormalMap = false;
         }
-        BumpMat.SetInt("_ShowFlag", (int) (ShowOptions));
-        BumpMat.SetFloat("_Bumpiness", Bumpiness);
+
+        // controls all of the materials (Bump and Normal)
+        int f = (int) ShowOptions;
+        f |= UseMapAsNormal ? kUseMapAsNormal : 0;
+        Shader.SetGlobalInt("_ShowFlag", f);
+        Shader.SetGlobalFloat("_BumpinessU", BumpinessU);
+        Shader.SetGlobalFloat("_BumpinessV", BumpinessV);
     }
 
     // Normal map computation support
@@ -76,9 +84,10 @@ public class BumpMap : MonoBehaviour
                 float rb = NormalMapSource.GetPixel(rx, by).grayscale;
                 float lb = NormalMapSource.GetPixel(lx, by).grayscale;
 
+                // Normal in object space, assuming z is up
                 n.x = (rt + 2*r + rb) - (lt + 2*l + lb);       // x direction height differentiation
-                n.y = (rt + 2*t + lt) - (rb + 2*b + lb);
-                n.z = 1.0f;
+                n.y = (rt + 2*t + lt) - (rb + 2*b + lb);       // xy is the plane
+                n.z = 1.0f; // z is up
                 n = 0.5f * (n.normalized + Vector3.one);
             
                 c.r = n.x;
