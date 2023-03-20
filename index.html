@@ -1,6 +1,133 @@
-<title>CSS552: Topics in Rendering </title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS 552</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-<h1>CSS 552: Topics in Rendering</h1>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}   
+
+/* Style the header */
+header {
+  background-color: #426;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+article {
+  text-align: center;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+a {font-size: 24px}
+
+h1 {font-size: 24px}
+h3 {font-size: 22px;
+text-align: justify;
+}
+
+/*header CSS styling*/
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #213;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #d3a302;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<header>
+  <img src="./uwlogo.png" width="600" height="103" align="left"><br><br>
+  <h2>CSS 552 - Topics in Rendering</h2>
+  <h3>This course studies the algorithms and technologies involved in synthesizing high quality three dimensional images in real-time. The course covers the foundational mathematics required, examines the programming model of modern graphics processing unit (GPU), studies algorithms, for and how these algorithms are being mapped onto the modern GPU for real-time effect rendering. Topics covered include: GPU architecture, coordinate transformation pipeline, vertex and fragment shaders, illumination models, texture sampling and synthesis, forward- and deferred-rendering, multi-pass rendering, and post-rendering processing. After this course, students will understand the approaches to model and approximate real world physical elements for synthesizing imageries, including: light sources, materials, and illumination computation, and be able to implementing such models on modern GPUs.</h3>
+</header>
+
+<div class="topnav">
+  <a class="active" href="">Projects</a>
+  <a href="https://www.uwb.edu/">UWB</a>
+  <a href="https://www.uwb.edu/css">CSS</a>
+  <a href="http://faculty.washington.edu/ksung/">Kelvin Sung</a>
+  <a href="https://myuwbclasses.github.io/CSS385/">CSS385: Game Dev (Kelvin)</a>
+  <a href="https://github.com/pisanorg/w/wiki/css385">CSS385: Game Dev (Yusuf)</a>
+  <a href="https://myuwbclasses.github.io/CSS452/">CSS452: Game Engine Dev</a>
+  <a href="https://myuwbclasses.github.io/CSS451/">CSS551: 3D Computer Graphics</a>
+</div>
 
 <p> This is what we did in Winter 2023. </p>
 
@@ -60,3 +187,5 @@
     <iframe src="./MP/MP8/Parker_MP8.mp4" width="600" height="350"></iframe>
 </ul>
 
+</body>
+</html>
