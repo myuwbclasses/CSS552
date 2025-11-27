@@ -14,6 +14,8 @@ Shader "Unlit/EX4_Shader"
         Pass
         {
             HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
                 #include "../EX1-WC-ShowOC/P1-DrawInWC.cginc"
             ENDHLSL
         }
