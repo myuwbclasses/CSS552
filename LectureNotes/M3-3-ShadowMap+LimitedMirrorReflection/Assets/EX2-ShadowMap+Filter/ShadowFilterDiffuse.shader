@@ -12,7 +12,7 @@ Shader "Unlit/ShadowFilterDiffuse"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -139,7 +139,7 @@ Shader "Unlit/ShadowFilterDiffuse"
                 return float4(0.1, 0.1, 0.1, 0) + (col * NdotL);  // so will not be completely black
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

@@ -30,7 +30,7 @@ Shader "Unlit/SetStencilMask"
             ColorMask R
             
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -39,7 +39,7 @@ Shader "Unlit/SetStencilMask"
             #include "../CommonShaderCode/CommonFShader.cginc"
 
             
-            ENDCG
+            ENDHLSL
         }
     }
 }

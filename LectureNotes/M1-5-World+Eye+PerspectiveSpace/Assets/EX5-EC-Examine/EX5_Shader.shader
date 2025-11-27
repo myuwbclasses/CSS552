@@ -14,13 +14,13 @@ Shader "Unlit/EX5_Shader"
     
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #include "../EX1-WC-ShowOC/P1-DrawInWC.cginc"
-            ENDCG
+            ENDHLSL
         }
         Pass  // Examine the EC Space
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
 
@@ -59,7 +59,7 @@ Shader "Unlit/EX5_Shader"
                 {
                     return float4(0, 1, 0, 1);
                 }
-            ENDCG
+            ENDHLSL
         }
 
     }

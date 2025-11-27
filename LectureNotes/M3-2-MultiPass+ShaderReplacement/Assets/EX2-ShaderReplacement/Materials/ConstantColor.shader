@@ -6,14 +6,14 @@
 		
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 			#include "ConstantColorCommon.cginc"
 
 			float4 frag(v2f i) : SV_Target
 			{
 				return float4(1.0, 0.0, 0.0, 1.0);
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 
@@ -23,14 +23,14 @@
 		
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 			#include "ConstantColorCommon.cginc"
 
 			float4 frag(v2f i) : SV_Target
 			{
 				return float4(0.0, 0.0, 1.0, 1.0);
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

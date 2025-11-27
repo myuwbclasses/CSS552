@@ -14,7 +14,7 @@ Shader "Unlit/NoiseOnObject"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -64,7 +64,7 @@ Shader "Unlit/NoiseOnObject"
                 // return float4(n, n, n, 1);
                 return n * _Color1 + (1-n) * _Color2;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

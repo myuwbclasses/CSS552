@@ -11,7 +11,12 @@ Shader "Unlit/EX2_Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
+                // This is a pre-processor bug:
+                //     without these two declarations
+                //     #include is not processed
+                //     it is ok if the "vert" name duplicate (re-specified)
+                //     BUT, it is not ok if the "vert" symbol is not defined
                 #pragma vertex vert
                 #pragma fragment frag
 
@@ -50,7 +55,7 @@ Shader "Unlit/EX2_Shader"
                 {
                     return float4(0, 1, 0, 1);
                 }
-            ENDCG
+            ENDHLSL
         }
 
     }

@@ -14,7 +14,7 @@ Shader "Unlit/Lens"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -101,7 +101,7 @@ Shader "Unlit/Lens"
 
                 return c1;                
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

@@ -13,7 +13,7 @@ Shader "Unlit/MySimpleDefault"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -21,7 +21,7 @@ Shader "Unlit/MySimpleDefault"
             #include "../CommonShaderCode/CommonVShader.cginc"
             #include "../CommonShaderCode/CommonFShader.cginc"
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

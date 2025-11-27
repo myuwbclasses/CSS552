@@ -16,7 +16,7 @@ Shader "Unlit/EX4_Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
 
@@ -74,7 +74,7 @@ Shader "Unlit/EX4_Shader"
                 {
                     return _Color;
                 }
-            ENDCG
+            ENDHLSL
         }
 
     }

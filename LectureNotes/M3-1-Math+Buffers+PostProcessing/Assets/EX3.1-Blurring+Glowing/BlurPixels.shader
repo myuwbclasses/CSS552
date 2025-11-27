@@ -13,7 +13,7 @@ Shader "Unlit/BlurPixels"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -67,7 +67,7 @@ Shader "Unlit/BlurPixels"
                 }
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

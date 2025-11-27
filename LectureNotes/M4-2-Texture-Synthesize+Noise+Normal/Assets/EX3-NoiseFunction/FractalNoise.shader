@@ -15,7 +15,7 @@ Shader "Unlit/FractalNoise"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -67,7 +67,7 @@ Shader "Unlit/FractalNoise"
                 return n * _Color1 + (1-n) * _Color2;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

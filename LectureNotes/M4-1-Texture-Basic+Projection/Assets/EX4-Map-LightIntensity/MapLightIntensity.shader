@@ -16,7 +16,7 @@ Shader "Unlit/MapLightIntensity"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -56,7 +56,7 @@ Shader "Unlit/MapLightIntensity"
                 return col * NdotL * lightIntensity;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

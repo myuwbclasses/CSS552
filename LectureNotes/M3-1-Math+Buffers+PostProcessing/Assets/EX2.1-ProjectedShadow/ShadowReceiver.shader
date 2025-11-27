@@ -23,13 +23,13 @@ Shader "Unlit/ShadowReceiver"
                 Pass Replace
             }
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "../CommonShaderCode/CommonDataStruct.cginc"
             #include "../CommonShaderCode/CommonVShader.cginc"
             #include "../CommonShaderCode/CommonFShader.cginc"
-            ENDCG
+            ENDHLSL
         }  // Pass
     } // SubShader
 }

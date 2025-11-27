@@ -17,7 +17,7 @@ Shader "Unlit/MappedFragment"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -56,7 +56,7 @@ Shader "Unlit/MappedFragment"
                 return col * NdotL;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

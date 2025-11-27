@@ -11,7 +11,7 @@ Shader "552/LightShader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             
@@ -32,7 +32,7 @@ Shader "552/LightShader"
             {
                 return _Color;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

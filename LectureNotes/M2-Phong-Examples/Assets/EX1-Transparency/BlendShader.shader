@@ -26,7 +26,7 @@ Shader "552/BlendShader"
                 // Blend DstColor Zero // Multiplicative
                 // Blend DstColor SrcColor // 2x multiplicative
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -60,7 +60,7 @@ Shader "552/BlendShader"
                 float4 col = tex2D(_MainTex, i.uv);
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

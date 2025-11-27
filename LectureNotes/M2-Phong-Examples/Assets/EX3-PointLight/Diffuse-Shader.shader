@@ -13,7 +13,7 @@ Shader "552/Diffuse-Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -77,7 +77,7 @@ Shader "552/Diffuse-Shader"
 
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

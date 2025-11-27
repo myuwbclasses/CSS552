@@ -14,7 +14,7 @@ Shader "Unlit/RampTexture"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -26,7 +26,7 @@ Shader "Unlit/RampTexture"
             float4 frag(v2f i) : SV_TARGET { 
                 return i.uv.x * _Color1 + i.uv.y * _Color2;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

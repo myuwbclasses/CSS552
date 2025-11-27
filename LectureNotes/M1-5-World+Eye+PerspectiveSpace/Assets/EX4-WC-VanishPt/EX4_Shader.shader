@@ -13,13 +13,13 @@ Shader "Unlit/EX4_Shader"
     
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #include "../EX1-WC-ShowOC/P1-DrawInWC.cginc"
-            ENDCG
+            ENDHLSL
         }
         Pass  // vanishes all vertices
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
 
@@ -67,7 +67,7 @@ Shader "Unlit/EX4_Shader"
                 {
                     return float4(0, 1, 0, 1);
                 }
-            ENDCG
+            ENDHLSL
         }
 
     }

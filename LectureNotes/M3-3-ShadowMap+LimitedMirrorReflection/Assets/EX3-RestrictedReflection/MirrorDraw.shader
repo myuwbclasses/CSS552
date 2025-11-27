@@ -18,7 +18,7 @@ Shader "Unlit/MirrorDraw"
                 Comp Equal
             } 
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -26,7 +26,7 @@ Shader "Unlit/MirrorDraw"
             #include "../CommonShaderCode/CommonVShader.cginc"
             #include "../CommonShaderCode/CommonFShader.cginc"
             
-            ENDCG
+            ENDHLSL
         }
     }
 
@@ -52,7 +52,7 @@ Shader "Unlit/MirrorDraw"
                         //           If Z-buffer write is on, will occlude everything!
 
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             
@@ -82,7 +82,7 @@ Shader "Unlit/MirrorDraw"
             {
                 return _MirrorColor;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

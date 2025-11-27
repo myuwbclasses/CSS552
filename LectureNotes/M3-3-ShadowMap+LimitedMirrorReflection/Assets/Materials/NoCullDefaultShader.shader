@@ -13,7 +13,7 @@ Shader "Custom/NoCullDefaultShader"
         LOD 200
         Cull Off
 
-        CGPROGRAM
+        HLSLPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard fullforwardshadows
 
@@ -48,7 +48,7 @@ Shader "Custom/NoCullDefaultShader"
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
         }
-        ENDCG
+        ENDHLSL
     }
     FallBack "Diffuse"
 }

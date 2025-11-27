@@ -26,7 +26,7 @@ Shader "Unlit/EX5_Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #pragma vertex vert
                 #pragma fragment frag
 
@@ -65,7 +65,7 @@ Shader "Unlit/EX5_Shader"
                 {
                     return float4(0.9, 0.5, 0.6, 1);
                 }
-            ENDCG
+            ENDHLSL
         }
 
     }

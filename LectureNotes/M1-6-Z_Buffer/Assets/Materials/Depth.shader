@@ -12,7 +12,7 @@ Shader "Unlit/Depth"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -46,7 +46,7 @@ Shader "Unlit/Depth"
 
                 return float4(d, d, d, 1);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

@@ -17,7 +17,7 @@ Shader "Unlit/StrangeSine"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -35,7 +35,7 @@ Shader "Unlit/StrangeSine"
                 float v = sin(d * _Frequency * 2 * 3.14 );
                 return v * _Color1 + (1-v) * _Color2;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

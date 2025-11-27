@@ -22,7 +22,7 @@ Shader "Unlit/Z-Buf-Control"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -42,7 +42,7 @@ Shader "Unlit/Z-Buf-Control"
             {
                 return float4(1, 0, 0, 1);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

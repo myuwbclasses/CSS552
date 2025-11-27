@@ -23,7 +23,7 @@ Shader "Unlit/CheckStencilMask"
             }
             
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -33,7 +33,7 @@ Shader "Unlit/CheckStencilMask"
             //    Using the common fragment shader results in black!
             //    Why? Geometry has no UV defined!?
             
-            ENDCG
+            ENDHLSL
         }
     }
 }

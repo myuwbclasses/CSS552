@@ -10,7 +10,7 @@
 		
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
             #pragma fragment frag
 			#include "UnityCG.cginc"
@@ -50,7 +50,7 @@
 				}
 				return float4(p, len);  // outout range is 32-bit float
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

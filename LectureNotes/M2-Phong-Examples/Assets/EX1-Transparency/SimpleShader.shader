@@ -11,7 +11,7 @@ Shader "552/ConstColorShader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -44,7 +44,7 @@ Shader "552/ConstColorShader"
                 fixed4 col = tex2D(_MainTex, i.uv);
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

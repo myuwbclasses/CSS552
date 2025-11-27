@@ -13,7 +13,7 @@ Shader "Unlit/ProjectionMap"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -56,7 +56,7 @@ Shader "Unlit/ProjectionMap"
                 return col * NdotL;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

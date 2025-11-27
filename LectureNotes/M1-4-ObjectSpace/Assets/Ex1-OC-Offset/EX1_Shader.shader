@@ -13,13 +13,20 @@ Shader "Unlit/EX1_Shader"
         Pass
         {
             HLSLPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+                
                 #include "P1-DrawOriginal.cginc"
-            ENDHLSL
+            
+                ENDHLSL
         }
 
        Pass
         {
             HLSLPROGRAM
+                #pragma vertex vert
+                #pragma fragment frag
+
                 #include "P2-DrawAtOffset.cginc"
             ENDHLSL
         }

@@ -13,7 +13,7 @@ Shader "Unlit/ShowTexture"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             
             #pragma vertex vert
             #pragma fragment frag
@@ -25,7 +25,7 @@ Shader "Unlit/ShowTexture"
                 return (tex2D(_MainTex, i.uv));
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

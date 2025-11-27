@@ -15,7 +15,7 @@ Shader "Unlit/Mirror"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             
@@ -47,7 +47,7 @@ Shader "Unlit/Mirror"
                     // alpha MUST BE zero, indicating this pixel is "empty" 
                     // empty for objects and for MirrorCam to draw mirrored objects into
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

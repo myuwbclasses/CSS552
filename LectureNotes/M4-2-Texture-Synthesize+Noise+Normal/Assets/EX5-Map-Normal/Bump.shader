@@ -15,7 +15,7 @@ Shader "Unlit/BumpShader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -133,7 +133,7 @@ Shader "Unlit/BumpShader"
                 // last option: kUsePerturbedNormalWithColor
                 return nDotL * col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

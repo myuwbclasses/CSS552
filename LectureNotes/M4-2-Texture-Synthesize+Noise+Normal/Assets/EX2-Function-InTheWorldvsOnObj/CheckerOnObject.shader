@@ -16,7 +16,7 @@ Shader "Unlit/CheckerOnObject"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -69,7 +69,7 @@ Shader "Unlit/CheckerOnObject"
                     return _Color2;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

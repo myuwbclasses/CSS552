@@ -16,7 +16,7 @@ Shader "Unlit/CheckerInWorld"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -38,7 +38,7 @@ Shader "Unlit/CheckerInWorld"
                     return _Color2;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

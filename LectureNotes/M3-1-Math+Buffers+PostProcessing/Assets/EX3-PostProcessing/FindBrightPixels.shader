@@ -13,7 +13,7 @@ Shader "Unlit/FindBrihtPixels"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -49,7 +49,7 @@ Shader "Unlit/FindBrihtPixels"
                 
                 return float4(0, 0, 0, 1);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

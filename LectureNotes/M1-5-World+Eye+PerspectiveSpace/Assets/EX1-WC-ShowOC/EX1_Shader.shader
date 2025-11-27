@@ -11,16 +11,16 @@ Shader "Unlit/EX1_Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #include "P1-DrawInWC.cginc"
-            ENDCG
+            ENDHLSL
         }
 
        Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
                 #include "P2-DrawInOC.cginc"
-            ENDCG
+            ENDHLSL
         }
     }
 }

@@ -13,7 +13,7 @@ Shader "Unlit/CombinePixels"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -69,7 +69,7 @@ Shader "Unlit/CombinePixels"
                         // This blending favors MainCam over MirrorCam results
                         // Or, when overlaps, show MainCam object
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

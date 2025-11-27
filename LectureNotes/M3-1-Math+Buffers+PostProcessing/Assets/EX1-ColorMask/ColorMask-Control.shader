@@ -20,7 +20,7 @@ Shader "Unlit/ColorMask-Control"
         {
             ColorMask R  // this overrides the SubShader setting
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -43,12 +43,12 @@ Shader "Unlit/ColorMask-Control"
                 return o;
             }
             #include "../CommonShaderCode/CommonFShader.cginc"
-            ENDCG
+            ENDHLSL
         }
 
         Pass   // Simple drawing
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -56,7 +56,7 @@ Shader "Unlit/ColorMask-Control"
             #include "../CommonShaderCode/CommonVShader.cginc"
             #include "../CommonShaderCode/CommonFShader.cginc"
             
-            ENDCG
+            ENDHLSL
         }
     }
 }

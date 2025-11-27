@@ -16,7 +16,7 @@ Shader "Unlit/CheckerTexture"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -43,7 +43,7 @@ Shader "Unlit/CheckerTexture"
                     return _Color2;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }

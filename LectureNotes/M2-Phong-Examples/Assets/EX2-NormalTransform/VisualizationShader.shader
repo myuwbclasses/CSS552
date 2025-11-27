@@ -12,7 +12,7 @@ Shader "552/Visualization-Shader"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -69,7 +69,7 @@ Shader "552/Visualization-Shader"
                 
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

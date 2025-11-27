@@ -13,7 +13,7 @@ Shader "Unlit/EX7_ShaderWithTextureMap"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -60,7 +60,7 @@ Shader "Unlit/EX7_ShaderWithTextureMap"
                 
                 return _Blend * c1 + (1-_Blend) * c2;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

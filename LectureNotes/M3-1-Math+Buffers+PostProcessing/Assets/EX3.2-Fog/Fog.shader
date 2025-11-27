@@ -13,7 +13,7 @@ Shader "Unlit/Fog"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -80,7 +80,7 @@ Shader "Unlit/Fog"
 
                 return c1;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

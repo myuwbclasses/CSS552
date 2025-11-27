@@ -44,7 +44,7 @@ Shader "Unlit/ShadowCaster"
             //    v is vertex position
 
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             
@@ -90,17 +90,17 @@ Shader "Unlit/ShadowCaster"
             {
                 return _ShadowColor;  // color of shadow
             }
-            ENDCG
+            ENDHLSL
         }
         Pass // normal pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #include "../CommonShaderCode/CommonDataStruct.cginc"
             #include "../CommonShaderCode/CommonVShader.cginc"
             #include "../CommonShaderCode/CommonFShader.cginc"
-            ENDCG
+            ENDHLSL
         } // second pass
     } // SubShader
 }

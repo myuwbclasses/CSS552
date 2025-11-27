@@ -13,7 +13,7 @@ Shader "Unlit/CombinePixels"
 
         Pass
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -47,7 +47,7 @@ Shader "Unlit/CombinePixels"
                 float4 c2 = tex2D(_AnotherImage, fromV.uv);
                 return c1 + _blendWeight * c2;;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

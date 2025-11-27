@@ -15,7 +15,7 @@ Shader "Unlit/TurbulanceNoise"
 
         Pass 
         {   
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -71,7 +71,7 @@ Shader "Unlit/TurbulanceNoise"
                 return n * _Color1 + (1-n) * _Color2;
             }
            
-            ENDCG
+            ENDHLSL
         }
     }
 }
