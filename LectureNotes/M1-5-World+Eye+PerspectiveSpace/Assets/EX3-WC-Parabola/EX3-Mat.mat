@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: EX3-Mat
   m_Shader: {fileID: 4800000, guid: 289f11f0650053e4c9baa1a8327fcdc9, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,9 +63,9 @@ Material:
     - _ClampFlag: 3
     - _ShowInOC: 0
     m_Floats:
-    - _A: 1
-    - _B: 0
-    - _Blend: 1
+    - _A: 0.11
+    - _B: -0.44
+    - _Blend: 0.772
     - _BumpScale: 1
     - _C: 0
     - _ClampValue: 0.8
@@ -70,8 +73,8 @@ Material:
     - _D: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _E: 0
-    - _F: 0
+    - _E: 4.75
+    - _F: -4.18
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -90,3 +93,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

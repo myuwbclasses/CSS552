@@ -57,6 +57,8 @@ Shader "Unlit/EX4_Shader"
                         p = mul(unity_ObjectToWorld, p);  // objcet to world
                         p += _SinTime.z * (_VPoint-p);  // <-- WATCH OUT!!
                                                     // _VPoint is in OC and p is WC!!
+                                                    // Or, saying _VPoint does notfollow 
+                                                    // the objectToworld transfform
                     }
 
                     p = mul(UNITY_MATRIX_V, p);  // To view space
