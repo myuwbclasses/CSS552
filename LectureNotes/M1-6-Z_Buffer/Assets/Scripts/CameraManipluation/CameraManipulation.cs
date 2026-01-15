@@ -27,8 +27,8 @@ public partial class CameraManipulation : MonoBehaviour
         transform.LookAt(LookAt.transform);
 
         // Check to make sure mouse position is indeed in the viewport
-        if (!MouseInCameraViewport())
-            return;
+        //if (!MouseInCameraViewport())
+           // return;
 
         if (Input.GetKey(KeyCode.LeftAlt) &&
             (Input.GetMouseButtonDown(0) || (Input.GetMouseButtonDown(1))))

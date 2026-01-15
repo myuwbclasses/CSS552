@@ -31,7 +31,7 @@ Shader "Unlit/Depth"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.dist = o.vertex.z / o.vertex.w; // distance
                 // by default, the closer the larger the value, furthest is zero
-                    // this distance is from the camera to the object
+                // this distance is from the camera to the object
                 return o;
             }
 
