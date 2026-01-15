@@ -63,11 +63,11 @@ Material:
     - _ClampFlag: 3
     - _ShowInOC: 0
     m_Floats:
-    - _A: 1
-    - _B: 0
-    - _Blend: 0
+    - _A: 1.5
+    - _B: 0.22
+    - _Blend: 0.651
     - _BumpScale: 1
-    - _C: 0
+    - _C: 1.27
     - _ClampValue: 0.8
     - _Cutoff: 0.5
     - _D: 0
