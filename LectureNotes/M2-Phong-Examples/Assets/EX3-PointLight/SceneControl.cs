@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneControl : MonoBehaviour
@@ -9,6 +7,7 @@ public class SceneControl : MonoBehaviour
     public bool ShowTexture = true; 
 
     public Transform LightPosition = null;
+    
     // Start is called before the first frame update
     void Start()
     {
