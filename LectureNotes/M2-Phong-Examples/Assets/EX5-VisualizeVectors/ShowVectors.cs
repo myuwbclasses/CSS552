@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShowVectors : MonoBehaviour
 {
     class VecGroup {
-        LineSegment nVec, lVec, vVec, hVec;
+        LineSegment nVec, lVec, vVec, hVec, rVec;
         Vector3 Pos;
         const float kVectorWidth = 0.1f;
         const float kVectorLength = 3.0f;
@@ -14,16 +14,19 @@ public class ShowVectors : MonoBehaviour
             lVec = LineSegment.CreateLineSegment();
             vVec = LineSegment.CreateLineSegment();
             hVec = LineSegment.CreateLineSegment();
+            rVec = LineSegment.CreateLineSegment();
             
             nVec.SetWidth(kVectorWidth);
             lVec.SetWidth(kVectorWidth);
             vVec.SetWidth(kVectorWidth);
             hVec.SetWidth(kVectorWidth);
+            rVec.SetWidth(kVectorWidth);
 
             nVec.GetComponent<Renderer>().material.color = Color.white;
             lVec.GetComponent<Renderer>().material.color = Color.blue;
             vVec.GetComponent<Renderer>().material.color = Color.red;
             hVec.GetComponent<Renderer>().material.color = Color.green;
+            rVec.GetComponent<Renderer>().material.color = Color.black;
         }
         public void SetAt(Vector3 at) {Pos = at; }
         public void UpdateN(Transform t, Vector3 n) { 
@@ -47,12 +50,17 @@ public class ShowVectors : MonoBehaviour
             Vector3 d = 0.5f * (lVec.transform.up + vVec.transform.up);
             hVec.SetEndPoints(Pos, Pos+kVectorLength*d);
         }
-        public void Update(Transform myT, Transform eyeT, Vector3 lightPt)
+        
+        public void Update(Transform myT, Transform eyeT, Vector3 lightPt, Vector3 n)
         {
             UpdateN(myT, Vector3.up);
             UpdateV(eyeT);
             UpdateL(lightPt);
             UpdateH();
+
+            // update R
+            Vector3 d = Vector3.Reflect(-lVec.transform.up, n);
+            rVec.SetEndPoints(Pos, Pos+kVectorLength*d);
         }
         public void ShowAllVectors(bool f)
         {
@@ -60,12 +68,15 @@ public class ShowVectors : MonoBehaviour
             vVec.gameObject.SetActive(f);
             lVec.gameObject.SetActive(f);
             hVec.gameObject.SetActive(f);
+            rVec.gameObject.SetActive(f);
         }
     }
     // Assume to be attached to a plane
 
-    public VizControl SceneController = null;
+    public SceneControlBase SceneController = null;
     VecGroup[] Vecs = null;
+
+    public bool ShowAll = true;
 
     void Start()
     {
@@ -90,7 +101,12 @@ public class ShowVectors : MonoBehaviour
         else
             eyeT = SceneView.lastActiveSceneView.camera.transform;
         
-        for (int i = 0; i<5; i++)
-            Vecs[i].Update(transform, eyeT, SceneController.LightPosition.localPosition);
+        for (int i = 0; i<5; i++) {
+            Vecs[i].ShowAllVectors(ShowAll);
+            Vecs[i].Update(transform, eyeT, 
+                    SceneController.LightPosition.localPosition,
+                    transform.up  // n of the geom
+                    );
+        }
     }
 }

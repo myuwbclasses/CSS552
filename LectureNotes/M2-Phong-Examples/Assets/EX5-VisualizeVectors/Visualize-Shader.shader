@@ -45,12 +45,14 @@ Shader "552/Visualize-Shader"
             static const int kShow_L = 1 << 1;
             static const int kShow_N = 1 << 2;
             static const int kShow_H = 1 << 3;
-            static const int kShow_NL = 1 << 4;
-            static const int kShow_NH = 1 << 5;
-            static const int kShow_VH = 1 << 6;             
-            static const int kShow_NV = 1 << 7;
-            static const int kShow_NHNV= 1 << 8;
-            static const int kShow_NHNL = 1 << 9;
+            static const int kShow_R = 1 << 4;
+            static const int kShow_NL = 1 << 5;
+            static const int kShow_VR = 1 << 6;
+            static const int kShow_NH = 1 << 7;
+            static const int kShow_VH = 1 << 8;             
+            static const int kShow_NV = 1 << 9;
+            static const int kShow_NHNV= 1 << 10;
+            static const int kShow_NHNL = 1 << 11;
 
             v2f vert (appdata v) {
                 v2f o;
@@ -67,6 +69,7 @@ Shader "552/Visualize-Shader"
             }
 
             #define DotNL   (max(0.0, dot(N, L)))
+            #define DotVR   (max(0.0, dot(V, R)))
             #define DotNH   (max(0.0, dot(N, H)))
             #define DotVH   (max(0.0, dot(V, H)))
             #define DotNV   (max(0.0, dot(N, V)))
@@ -91,6 +94,7 @@ Shader "552/Visualize-Shader"
                 float3 V = normalize(_CameraPos - i.worldPt);
                 float3 N = i.normal;
                 float3 H = (L + V) * 0.5;
+                float3 R = reflect(-L, N);
 
                 float3 r = float3(0, 0, 0);
 
@@ -98,8 +102,10 @@ Shader "552/Visualize-Shader"
                 ShowVector(L)
                 ShowVector(N)
                 ShowVector(H)
+                ShowVector(R)
 
                 ShowDot(NL)
+                ShowDot(VR)
                 ShowDot(NH)
                 ShowDot(VH)
                 ShowDot(NV)
