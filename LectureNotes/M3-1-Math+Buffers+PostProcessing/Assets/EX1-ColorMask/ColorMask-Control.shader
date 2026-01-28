@@ -13,12 +13,12 @@ Shader "Unlit/ColorMask-Control"
         // https://docs.unity3d.com/Manual/SL-ColorMask.html
         // Colormask can come here to mask out all passes
         //    Or inside a pass to apply only to that pass
-        ColorMask G
+        ColorMask R
             // 0: all off
-            // RGBA: any combination to leave them onw
+            // RGBA: any combination to leave them on
         Pass   // draw x-units away with only R
         {
-            ColorMask R  // this overrides the SubShader setting
+            ColorMask RGBA  // this overrides the SubShader setting
 
             HLSLPROGRAM
             #pragma vertex vert
