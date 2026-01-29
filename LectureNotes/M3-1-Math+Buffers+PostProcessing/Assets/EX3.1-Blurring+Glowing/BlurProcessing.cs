@@ -31,8 +31,8 @@ public class BlurProcessing : MonoBehaviour
         Debug.Assert(BlurPixelMat != null);
 
         #region // for blurring support
-        float invW = 1.0f/(float)Camera.main.pixelWidth;
-        float invH = 1.0f/(float)Camera.main.pixelHeight;
+        float invW = 1.0f/(float)Camera.main.pixelWidth;  // number of pixels in width
+        float invH = 1.0f/(float)Camera.main.pixelHeight;  // number of pixels in height
 
         BlurPixelMat.SetFloat("_invWidth", invW);
         BlurPixelMat.SetFloat("_invHeight", invH);
