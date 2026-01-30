@@ -38,7 +38,7 @@ public class SelectReplacement : MonoBehaviour
                 break;
             case ShaderOption.ConstantColorShader:
                 GetComponent<Camera>().SetReplacementShader(ConstColorShader, "ConstantColor");
-                    // 1. Goes through all objects in the scene, find all shaders with "ConstantColor" Tag
+                    // 1. Goes through all shaders in the scene, find ones with "ConstantColor" Tag
                     // 2. match the values of the tag with the subshaders in ConstantColorShader
                     //             ConstantColorShader: has two values defined: red and blue
                     // 3. renders GameObjects with the corresponding subShader in ConstColorShader
