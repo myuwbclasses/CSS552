@@ -13,9 +13,11 @@ Shader "Custom/NoCullDefaultShader"
         LOD 200
         Cull Off
 
-        HLSLPROGRAM
+        CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard fullforwardshadows
+
+        #include "unitycg.cginc"
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -48,7 +50,7 @@ Shader "Custom/NoCullDefaultShader"
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
         }
-        ENDHLSL
+        ENDCG
     }
     FallBack "Diffuse"
 }
