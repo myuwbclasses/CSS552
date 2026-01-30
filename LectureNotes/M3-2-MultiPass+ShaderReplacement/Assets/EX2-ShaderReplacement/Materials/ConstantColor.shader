@@ -7,7 +7,11 @@
 		Pass
 		{
 			HLSLPROGRAM
-			#include "ConstantColorCommon.cginc"
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "../../CommonShaderCode/CommonDataStruct.cginc"
+			#include "../../CommonShaderCode/CommonVShader.cginc"
 
 			float4 frag(v2f i) : SV_Target
 			{
@@ -24,7 +28,11 @@
 		Pass
 		{
 			HLSLPROGRAM
-			#include "ConstantColorCommon.cginc"
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "../../CommonShaderCode/CommonDataStruct.cginc"
+			#include "../../CommonShaderCode/CommonVShader.cginc"
 
 			float4 frag(v2f i) : SV_Target
 			{
