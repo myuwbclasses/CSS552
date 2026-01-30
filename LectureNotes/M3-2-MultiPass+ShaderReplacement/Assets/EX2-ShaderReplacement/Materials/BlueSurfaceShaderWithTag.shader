@@ -1,4 +1,4 @@
-Shader "MyShaders/SurfaceShaderWithTag"
+Shader "MyShaders/BlueSurfaceShaderWithTag"
 {
     Properties
     {
@@ -9,10 +9,10 @@ Shader "MyShaders/SurfaceShaderWithTag"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" "ConstantColor"="blue"}
+        Tags { "RenderType"="Opaque" "ConstantColor"="blue" }
         LOD 200
 
-        HLSLPROGRAM
+        CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard fullforwardshadows
 
@@ -47,7 +47,7 @@ Shader "MyShaders/SurfaceShaderWithTag"
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
         }
-        ENDHLSL
+        ENDCG
     }
     FallBack "Diffuse"
 }
