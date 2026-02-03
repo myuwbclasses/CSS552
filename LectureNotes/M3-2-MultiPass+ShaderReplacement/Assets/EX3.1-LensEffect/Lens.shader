@@ -88,7 +88,7 @@ Shader "Unlit/Lens"
                     delta = _inFocusN - f;
                 }
 
-                float a = _inFocusF-_inFocusN;
+                float a = _inFocusF -_inFocusN;
                 float blend = delta/a; // blend is a linear percentage of how far from in-focus distance
                 CHECK_DEBUG(kShowDebugBlend, float4(blend, blend, blend, 1))
 

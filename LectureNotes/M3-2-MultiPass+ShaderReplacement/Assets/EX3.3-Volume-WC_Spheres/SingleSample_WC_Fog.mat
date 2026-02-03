@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fog
-  m_Shader: {fileID: 4800000, guid: 5361f26d332218448a249ec6eb1c30ef, type: 3}
+  m_Name: SingleSample_WC_Fog
+  m_Shader: {fileID: 4800000, guid: 74681ac44762d2f42a68cc06e1b72b89, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

@@ -19,4 +19,5 @@ struct v2f
 sampler2D _MainTex;
 float4 _MainTex_ST;
 float4 _LightPos;
+float4 _Color;
 

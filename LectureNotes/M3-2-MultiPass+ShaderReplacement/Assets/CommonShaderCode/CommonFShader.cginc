@@ -7,5 +7,5 @@ float4 frag (v2f i) : SV_Target
         col = tex2D(_MainTex, i.uv);
     float3 L = normalize(_LightPos - i.worldPos);
     float NdotL = max(0.1, dot(i.normal, L)); // don't clam everything off 
-    return col * NdotL;
+    return _Color * col * NdotL;
 }
