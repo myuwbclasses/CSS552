@@ -17,7 +17,9 @@ Shader "Unlit/CombinePixels"
             #pragma vertex vert
             #pragma fragment frag
 
-           struct appdata
+            #include "UnityCG.cginc"
+            
+            struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
