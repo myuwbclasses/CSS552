@@ -22,8 +22,14 @@ public class ShadowCamControl : MonoBehaviour
     };
 
     public Shader DepthShader = null;  // Material that computes ShadowMap or DepthMap
+    [Range(-0.5f, 0.5f)]
     public float DepthBias = 0.1f;  // 
+    [Range(-0.5f, 0.5f)]
     public float NormalBias = 0.1f;
+    [Range(-0.1f, 1.5f)]
+    public float ShadowDarkness = 0.2f;
+    [Range(0f, 1.0f)]
+    public float ShadowThreshold = 0.05f;
     public DebugShadowMap DebugFlag = DebugShadowMap.eDebugOff;
     public float DebugDistanceScale = 0.1f;
     
@@ -70,6 +76,8 @@ public class ShadowCamControl : MonoBehaviour
         ShadowMapDiffuse.SetMatrix("_WorldToLightNDC", m);
         ShadowMapDiffuse.SetFloat("_DepthBias", DepthBias);
         ShadowMapDiffuse.SetFloat("_NormalBias", NormalBias);
+        ShadowMapDiffuse.SetFloat("_ShadowDarkness", ShadowDarkness);
+        ShadowMapDiffuse.SetFloat("_ShadowThresold", ShadowThreshold);
         ShadowMapDiffuse.SetFloat("_DebugDistScale", DebugDistanceScale);
         
         ShadowMapDiffuse.SetInteger("_MapFlag", (int) DebugFlag);

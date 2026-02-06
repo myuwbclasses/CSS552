@@ -40,6 +40,8 @@ Shader "Unlit/ShadowFilterDiffuse"
             sampler2D _ShadowMap;
             float _DepthBias;
             float _NormalBias;
+            float _ShadowDarkness;  // how much to reduce NdotL
+            float _ShadowThresold;  // what is the NdotL value: how bright before we will consider shadowing
             float4x4 _WorldToLightNDC;
 
             // These two are defined by the ShadowMap resolution and 
@@ -74,9 +76,9 @@ Shader "Unlit/ShadowFilterDiffuse"
                 float4 p = mul(unity_ObjectToWorld, v.vertex);  // objcet to world
 
                 // For ShadowMap
-                p.xyz = p.xyz + _NormalBias * v.normal; // push the position out of the surface a little
-
-                o.worldPos = p.xyz;  // p.w is 1.0 at this poit
+                o.worldPos = p.xyz + _NormalBias * v.normal; // push the position out of the surface a little
+                    // Option: push the worldPos out by normal bias, so that the shadow map will capture the point better.
+                    //         leave the p without normal bias so that the basic shape of the object is not altered.
 
                 p = mul(UNITY_MATRIX_V, p);  // To view space
                 o.vertex = mul(UNITY_MATRIX_P, p);  // Projection 
@@ -109,7 +111,7 @@ Shader "Unlit/ShadowFilterDiffuse"
                 else if (_MapFlag & kFilter5) blocked = InShadow_5(d, uv);
                 else if (_MapFlag & kFilter9) blocked = InShadow_9(d, uv);
                 else if (_MapFlag & kFilter15) blocked = InShadow_15(d, uv);
-                else blocked = InShadow(d, uv) ? 1 : 0;
+                else blocked = InShadow(d, uv) ? 1 : 0;  // if not using filter, just return 0 or 1
                 return 1-blocked;
             }
 
@@ -119,6 +121,7 @@ Shader "Unlit/ShadowFilterDiffuse"
                 float4 col = float4(0.9, 0.7, 0.7, 1.0);
                 if ((i.uv.x != 0) && (i.uv.y != 0))
                     col = tex2D(_MainTex, i.uv);
+
                 float3 L = _LightPos - i.worldPos;
                 float distToLight = length(L);
                 L = L / distToLight;  // normalize L
@@ -134,7 +137,14 @@ Shader "Unlit/ShadowFilterDiffuse"
                 distFromMap += _DepthBias;  // push slightly outward to avoid self-shadowing
                 DEBUG_SHOW(kShowMapDistanceWithBias, V_TO_F4(distFromMap), _DebugDistScale)
                                 
-                NdotL *= LightStrength(distToLight, i.lightNDC);            
+                if ((NdotL > _ShadowThresold)) { // Only worry about shadow, 
+                    // if the point is facing the light and 
+                    //    since we are checking larger area in the map
+                    //    we are unable to consider if we are in shadow or not for this pixel
+                    float s = LightStrength(distToLight, i.lightNDC);
+                    if (s < 1)
+                        NdotL *= (s * _ShadowDarkness);
+                }
 
                 return float4(0.1, 0.1, 0.1, 0) + (col * NdotL);  // so will not be completely black
             }
