@@ -41,7 +41,7 @@ public class MirrorCamControl : MonoBehaviour
         }
 
         // 1. Mirror cam is the mirror of the MainCamera
-        //    Refer to EX1.4 (MirrorLine.cs) of M3-1 on Mirror!
+        //    Refer to M3-1 EX0.4 (EX0-VectorMath/4.Mirror+ReflectLine/MirrorLine.cs)
         Vector3 r = Vector3.Reflect(camV, TheMirror.up);
         
         transform.localPosition = p - dist * r;

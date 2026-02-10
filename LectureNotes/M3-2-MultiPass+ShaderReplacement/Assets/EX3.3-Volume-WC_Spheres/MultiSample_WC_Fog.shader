@@ -93,7 +93,7 @@ Shader "MyShaders/MultiSample_WC_Fog"
                 float n = 0;    // total number of samples taken
                 Ray lightRay;
                 do { 
-                    float3 trNoisePt = p - volume.center; // this anchors the noice to the sphere
+                    float3 trNoisePt = p; // - volume.center; // this anchors the noice to the sphere
                             // otherwise, when the sphere moves, the noise pattern will change
                     float tr = TrForInterval(trNoisePt, _vSampleStepSize, volume.radius); 
                             // transmittance for this small segment along eye ray
@@ -113,7 +113,8 @@ Shader "MyShaders/MultiSample_WC_Fog"
                                     // Remember light is assumed to be outside of the sphere
                                     // And, current visible point is inside the sphere
                                     // So, distance to exist the sphere is simply the interval
-                        float3 lgtNoisePt = trNoisePt + lightRay.direction * 0.5 * interval;
+                        float3 lgtNoisePt = trNoisePt + 
+                                            lightRay.direction * 0.5 * interval;
                                     // Assume light sample point is in the middle of the interval
                         float trToLight = TrForInterval(lgtNoisePt, interval, volume.radius);
                                     // trToLight is Lcast of slide-15
