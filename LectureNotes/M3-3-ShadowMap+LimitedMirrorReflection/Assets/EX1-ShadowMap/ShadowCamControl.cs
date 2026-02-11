@@ -21,25 +21,26 @@ public class ShadowCamControl : MonoBehaviour
         eDebugLightDistance = 0x04
     };
 
+    const int kShowNormalBias = 0x400;  // for debugging, show the normal bias version of the geoms
+
     public Shader DepthShader = null;  // Material that computes ShadowMap or DepthMap
-    [Range(-0.5f, 0.5f)]
-    public float DepthBias = 0.1f;  // 
-    [Range(-0.5f, 0.5f)]
-    public float NormalBias = 0.1f;
-    [Range(-0.1f, 1.5f)]
-    public float ShadowDarkness = 0.2f;
-    [Range(0f, 1.0f)]
-    public float ShadowThreshold = 0.05f;
+    [Header("Shadow Map Settings")]
+    [Range(-0.5f, 0.5f)]    public float DepthBias = 0.1f;  // 
+    [Range(-0.5f, 0.5f)]    public float NormalBias = 0.1f;
+    [Header("Shadow Rendering Settings")]
+    [Range(-0.1f, 1.5f)]    public float ShadowDarkness = 0.2f;
+    [Range(0f, 1.0f)]    public float ShadowThreshold = 0.05f;
+    [Header("Debug Settings")]
     public DebugShadowMap DebugFlag = DebugShadowMap.eDebugOff;
     public float DebugDistanceScale = 0.1f;
-    
+    public bool mShowNormalBias = false;
+
+    [Header("References: set once in the inspector")]
     public Material ShadowMapDiffuse;
     public GameObject ShowDepthTexture = null;
 
     Camera mShadowCam;
     RenderTexture mDepthTexture;
-
-    public bool Analyze = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +81,10 @@ public class ShadowCamControl : MonoBehaviour
         ShadowMapDiffuse.SetFloat("_ShadowThresold", ShadowThreshold);
         ShadowMapDiffuse.SetFloat("_DebugDistScale", DebugDistanceScale);
         
-        ShadowMapDiffuse.SetInteger("_MapFlag", (int) DebugFlag);
+        int flag = (int) DebugFlag;
+        if (mShowNormalBias)
+            flag |= kShowNormalBias;
+        ShadowMapDiffuse.SetInteger("_MapFlag", flag);
     }
 
     public RenderTexture GetDepthTexture() { 

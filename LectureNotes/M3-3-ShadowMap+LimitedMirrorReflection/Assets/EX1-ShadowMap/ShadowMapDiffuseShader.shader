@@ -53,6 +53,8 @@ Shader "Unlit/ShadowDiffuseShader"
             static const int kShowShadowInRed = 0x08;
             static const int kShowMapWC = 0x20;
 
+            static const int kShowNormalBias = 0x400;
+
             #define V_TO_F4(V) float4(V,V,V,1)
 
             #define DEBUG_SHOW(FLAG, VALUE, SCALE) {        \
@@ -72,7 +74,8 @@ Shader "Unlit/ShadowDiffuseShader"
                 o.worldPos = p.xyz + _NormalBias * v.normal; // push the position out of the surface a little
                     // Option: push the worldPos out by normal bias, so that the shadow map will capture the point better.
                     //         leave the p without normal bias so that the basic shape of the object is not altered.
-
+                if (_MapFlag & kShowNormalBias)
+                    p = float4(o.worldPos, 1);  // observe what kind of cheating we are doing!
                 p = mul(UNITY_MATRIX_V, p);  // To view space
                 o.vertex = mul(UNITY_MATRIX_P, p);  // Projection 
                             
