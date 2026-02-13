@@ -68,8 +68,8 @@ Shader "Unlit/CombinePixels"
                         // in the MainCam
                         //      the Mirror region has mask = 0 (Mirror.Shader)
                         //      Except, objects over mirror region will have mask set to 1
-                        // This blending favors MainCam over MirrorCam results
-                        // Or, when overlaps, show MainCam object
+                        // This blending shows mainCam object when overlaps,
+                        //      and shows mirror image when no mainCam object overlaps (mask = 0).                   
             }
             ENDHLSL
         }
