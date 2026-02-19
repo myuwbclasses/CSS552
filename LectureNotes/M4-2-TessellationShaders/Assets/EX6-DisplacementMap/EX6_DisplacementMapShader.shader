@@ -28,12 +28,17 @@ Shader"Custom/EX_DisplacementMapShader"
             
             sampler2D _MainTex;
 
-            // Our own cleaner Hull Shader
+            // To skip Hull Shader
+            // #define Vert2Hull OutputFromHull
+
+            // Our own cleaner Vert Shader
             #include "EX6_Shaders/EX6VertShader.cginc"
             
             // Tessellation shaders
             #include "EX6_Shaders/EX6HullShader.cginc"
             
+            // Tp skip HullShader
+            // #define OutputFromHull Domain2Geom
             // Screen space tessellation
             #include "../TessShared/EX3_TessFunction_ScreenSpace.cginc"
             
