@@ -50,10 +50,8 @@ OutputFromHull EX6Hull(InputPatch<Vert2Hull, 3> points,
     o.color = points[id].color;
     o.uv = points[id].uv;
 
-    // If there were more time, much more time
-    // I would examine the triangle interior for height variation
-    // and record that for the TessFunction to determine how much 
-    // to subdivide the triangle patch
+    // Examine: Displace the positions of the triangles, or, 
+    // compute the area of the triangle, etc.
 
     return o;
 }
