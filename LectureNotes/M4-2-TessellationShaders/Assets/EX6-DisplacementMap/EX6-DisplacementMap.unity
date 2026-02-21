@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82651b0e13170fa47a913eaf324dbb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointLightPos: {fileID: 0}
+  PointLightPos: {fileID: 772433009}
   LightType: 2097152
   EdgeLength: 50
   ComputeHeight: 0

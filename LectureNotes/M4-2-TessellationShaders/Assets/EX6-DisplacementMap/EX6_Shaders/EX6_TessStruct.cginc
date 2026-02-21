@@ -17,7 +17,6 @@ struct Vert2Hull {
     float4 pcPos : SV_POSITION; // Clip space position  // This must be there!
     float3 ocPos : TEXCOORD0; // Vertex position in Object space, for convenience
     float3 ocNormal : NORMAL; //  normal in OC space
-    float3 wcNormal: TEXCOORD1; // World space normal
     float2 uv : TEXCOORD2;
     float4 color : TEXCOORD3; // Vertex color
 };

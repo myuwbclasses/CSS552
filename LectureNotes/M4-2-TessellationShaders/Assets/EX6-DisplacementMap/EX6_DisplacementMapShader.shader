@@ -52,7 +52,8 @@ Shader"Custom/EX_DisplacementMapShader"
             //    Works with ControlFlags.cginc
             //    Able to display UV, Color, Normal, NdotL, etc. as color
             #define Domain2Frag Geom2Frag
-                    // to cheat SimpleFrag
+                    // to cheat SimpleFrag, different datatype (struct), but with EXACTLY the same
+                    // members in the struct
             #include "../TessShared/EX1_Frag_Simple.cginc"            
             ENDHLSL
         }
