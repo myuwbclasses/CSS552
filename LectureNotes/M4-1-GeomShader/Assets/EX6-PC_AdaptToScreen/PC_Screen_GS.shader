@@ -11,7 +11,7 @@ Shader"Custom/PC_Screen_GS"
         {
             CGPROGRAM
             #pragma vertex vert
-            #pragma geometry geom       // <-- This is NEW!
+            // #pragma geometry geom       // <-- This is NEW!
             #pragma fragment frag
 
             #include "UnityCG.cginc"
