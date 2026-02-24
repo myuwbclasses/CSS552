@@ -17,6 +17,7 @@ static const uint kDomainComputeHeight = 0x01 << 0;
 static const uint kGeomComputeHeight = 0x01 << 1;
 
 static const uint kNormalWithBC = 0x01 << 2; // Alternative is with slope approximation when doing height map
+static const uint kNormalWithFormula = 0x01 << 3; // Normal is computed with the formula based on the height difference in u and v direction
 
 // Hull shader control flags
 static const uint kHullNormalOffset = 0x01 << 5; // OFfset by  world normal

@@ -27,7 +27,20 @@ float3 ApproxNormalWithMap(float2 uv) {
     float hv2 = ColorToHeight(tex2Dlod(_MainTex, float4(uv - float2(0, dv), 0, _NormalApproxMapLevel))); // height at (u, v - dv)
     float dhu = hu1 - hu2; // height difference in u direction
     float dhv = hv1 - hv2; // height difference in v direction
-    return normalize(float3(-dhu, _HeightMapStrength, -dhv)); // Normal vector based on height differences
+    float3 n = normalize(float3(-dhu, _HeightMapStrength, -dhv)); // Normal vector based on height differences
+            // assuming du and dv are the same size ...  took away the 2* for the y-term
+    // Aanswer based on formula, if we know the units should be:
+    //     V1 = (2du, dhu * _HeightMapStrength, 0) and V2 = (0, dhv * _HeightMapStrength, 2dv), 
+    /// then normal is 
+    //    -cross(V1, V2) or cross(V2, V1) = (-dhu * 2dv * _HeightMapStrength, 2du * 2dv, -2du * dhv * _HeightMapStrength)
+    if (ModeIsSet(kNormalWithFormula))
+        n = normalize(float3(-dhu * 2 * dv * _HeightMapStrength, 4 * du * dv, -dhv * 2 * du * _HeightMapStrength)); 
+                // issue: du dv are based on pixel size, 
+                //        height and _Strength: values are based on OC space, so the unit is not consistent, 
+                // dv * _HeightMapStrength can potentially give really strange answer
+                // What should be done is to convert du and dv to the unit in OC space, at line 36
+                // Not doing that here, so this formular is not usable in practice.
+    return n;
 }   
 
 [domain("tri")] // Input is a triangle:

@@ -4,6 +4,7 @@ public class TessControl : MonoBehaviour {
     const uint kDomainComputeHeight = 0x01 << 0;
     const uint kGeomComputeHeight = 0x01 << 1; // 
     const uint kNormalWithBC = 0x01 << 2; // BC interpolate (or, implicit alternaitve slope approximate)
+    const uint kNormalWithFormula = 0x01 << 3; // compute normal with the formula based on the height difference in u and v direction when doing height map.
     public enum FragShowMode
     {
         eShowUnshadedTexture = 0x01 << 10,
@@ -39,6 +40,7 @@ public class TessControl : MonoBehaviour {
     [Range(0.01f, 2f)] public float HeightMapStrength = 1f; // Strength of height map displacement
     [Range(0, 10)] public int HeightMapLevel = 1; // Which level to sample for hieht map (0: is the base map, e.g., 9, is 2^9 filtered result)
     public bool NormalApproxWithBC = true; //compute normal with barycentric interpolation or with slope approximation when doing height map.
+    public bool NormalApproxWithFormula = false; // compute normal with the formula based on the height difference in u and v direction when doing height map.
     [Range(1, 10)] public int NormalApproxMapLevel = 2; // which level to sample for normal approximation
 
     [Header("EX3 + 4: Screen-Space Tessellation Control")]
@@ -67,6 +69,7 @@ public class TessControl : MonoBehaviour {
         mode |= NormalApproxWithBC ? kNormalWithBC : 0;
         mode |= DomainComputeHeight ? kDomainComputeHeight : 0;
         mode |= GeomComputeHeight ? kGeomComputeHeight : 0;
+        mode |= NormalApproxWithFormula ? kNormalWithFormula : 0;
 
         mat.SetInt("_Flag", (int) mode);
 
