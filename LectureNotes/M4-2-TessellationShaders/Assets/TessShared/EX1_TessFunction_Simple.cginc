@@ -19,8 +19,8 @@ TessFactor ComputeTessFactor(InputPatch<Vert2Hull, 3> points)
     _PatchEdge = _PatchInside + 1;
 
     o.edges0 = _PatchEdge;   // How much to subdivide the triangle patch, range between 1 to 64 (or 0 to 64?)
-    o.edges1 = _PatchEdge+1;  // For some reason _PatchEdge value is always set to 0.5
-    o.edges2 = _PatchEdge+2;
+    o.edges1 = _PatchEdge; // +1;  // For some reason _PatchEdge value is always set to 0.5
+    o.edges2 = _PatchEdge; // +2;
     o.inside = _PatchInside;     // This is triangle density, the number of triangles generated is approx (inside)^2
     
     return o;
