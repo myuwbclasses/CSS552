@@ -19,8 +19,9 @@ float ComputeHeightFormMap(float2 uv) {
 
 // Page 18 of Jeremy's report: https://drive.google.com/file/d/1b1bIooafvP9nOhcY1uLmUqowbGa6otN3/view
 float3 ApproxNormalWithMap(float2 uv) {
-    float du = 1.0 / _ScreenWidth; // from pixel to UV space, defined in TessControlFlags.cginc
-    float dv = 1.0 / _ScreenHeight;
+    float du = 1.0;   // 1.0 / _ScreenWidth; // from pixel to UV space, defined in TessControlFlags.cginc
+    float dv = 1.0;   // 1.0 / _ScreenHeight;
+                // Does not make sense to perform sampling in relation to the current screen size!!
     float hu1 = ColorToHeight(tex2Dlod(_MainTex, float4(uv + float2(du, 0), 0, _NormalApproxMapLevel))); // height at (u + du, v)
     float hu2 = ColorToHeight(tex2Dlod(_MainTex, float4(uv - float2(du, 0), 0, _NormalApproxMapLevel))); // height at (u - du, v)
     float hv1 = ColorToHeight(tex2Dlod(_MainTex, float4(uv + float2(0, dv), 0, _NormalApproxMapLevel))); // height at (u, v + dv)
