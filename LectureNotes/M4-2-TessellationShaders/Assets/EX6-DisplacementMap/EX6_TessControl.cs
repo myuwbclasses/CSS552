@@ -22,7 +22,7 @@ public class EX6_TessControl : MonoBehaviour {
     
     
     [Header("Light Position/Direction")]
-    public Transform PointLightPos;
+    public Transform LightInfo_Pt_Dir;
     public UseLightType LightType = UseLightType.ePointLight;
     
     [Header("Screen-Space Tessellation Control")]
@@ -42,7 +42,7 @@ public class EX6_TessControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Assert(PointLightPos != null, "Please assign the PointLightPos in inspector!");
+        Debug.Assert(LightInfo_Pt_Dir != null, "Please assign the PointLightPos in inspector!");
         mat = GetComponent<MeshRenderer>().material;
         Debug.Log("Main Camera screen resolution: " + Camera.main.pixelWidth + "x" + Camera.main.pixelHeight);
     }
@@ -62,8 +62,8 @@ public class EX6_TessControl : MonoBehaviour {
         mat.SetFloat("_ScreenHeight", Camera.main.pixelHeight);
         
         if (LightType == UseLightType.eDirectionalLight) {
-            mat.SetVector("_LightInfo", PointLightPos.up);
+            mat.SetVector("LightInfo_Pt_Dir", LightInfo_Pt_Dir.up);
         } else 
-            mat.SetVector("_LightInfo", PointLightPos.localPosition);
+            mat.SetVector("LightInfo_Pt_Dir", LightInfo_Pt_Dir.localPosition);
 	}
 }

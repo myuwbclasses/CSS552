@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7185521eb91c3f54ba86ca70176df215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointLightPos: {fileID: 1141525815}
+  LightInfo_Pt_Dir: {fileID: 1141525815}
   LightType: 2097152
   HullOffset: 0
   HullOffsetAmount: 0.1

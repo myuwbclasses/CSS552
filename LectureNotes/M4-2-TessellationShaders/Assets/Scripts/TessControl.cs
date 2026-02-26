@@ -24,7 +24,7 @@ public class TessControl : MonoBehaviour {
     
     
     [Header("Light Position/Direction")]
-    public Transform PointLightPos;
+    public Transform LightInfo_Pt_Dir;
     public UseLightType LightType = UseLightType.ePointLight;
     [Header("EX1: Hull Shader Control")]
     public bool HullOffset = false; // Whether to offset the hull points along normal direction. 
@@ -57,7 +57,7 @@ public class TessControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Assert(PointLightPos != null, "Please assign the PointLightPos in inspector!");
+        Debug.Assert(LightInfo_Pt_Dir != null, "Please assign the PointLightPos in inspector!");
         mat = GetComponent<MeshRenderer>().material;
         Debug.Log("Main Camera screen resolution: " + Camera.main.pixelWidth + "x" + Camera.main.pixelHeight);
     }
@@ -88,8 +88,8 @@ public class TessControl : MonoBehaviour {
         mat.SetFloat("_ScreenHeight", Camera.main.pixelHeight);
         
         if (LightType == UseLightType.eDirectionalLight) {
-            mat.SetVector("_LightInfo", PointLightPos.up);
+            mat.SetVector("_LightInfo", LightInfo_Pt_Dir.up);
         } else 
-            mat.SetVector("_LightInfo", PointLightPos.localPosition);
+            mat.SetVector("_LightInfo", LightInfo_Pt_Dir.localPosition);
 	}
 }
