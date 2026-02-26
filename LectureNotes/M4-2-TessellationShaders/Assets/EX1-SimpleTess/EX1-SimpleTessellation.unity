@@ -157,11 +157,14 @@ MonoBehaviour:
   HullOffsetAmount: 0.1
   PatchEdge: 1
   PatchInside: 1
+  DomainComputeHeight: 0
   HeightMapStrength: 0.1
+  HeightMapLevel: 1
   NormalApproxWithBC: 1
-  NormalApproxPixelDelta: 3
+  NormalApproxWithFormula: 0
+  NormalApproxMapLevel: 2
   EdgeLength: 1
-  ComputeMode: 1
+  GeomComputeHeight: 0
   ShowMode: 1024
 --- !u!64 &327787251
 MeshCollider:
@@ -424,11 +427,14 @@ MonoBehaviour:
   HullOffsetAmount: 0.1
   PatchEdge: 1
   PatchInside: 1
+  DomainComputeHeight: 0
   HeightMapStrength: 0.1
+  HeightMapLevel: 1
   NormalApproxWithBC: 1
-  NormalApproxPixelDelta: 3
+  NormalApproxWithFormula: 0
+  NormalApproxMapLevel: 2
   EdgeLength: 1
-  ComputeMode: 1
+  GeomComputeHeight: 0
   ShowMode: 1024
 --- !u!23 &603535074
 MeshRenderer:
@@ -513,11 +519,14 @@ MonoBehaviour:
   HullOffsetAmount: 0.1
   PatchEdge: 1
   PatchInside: 1
+  DomainComputeHeight: 0
   HeightMapStrength: 0.1
+  HeightMapLevel: 1
   NormalApproxWithBC: 1
-  NormalApproxPixelDelta: 3
+  NormalApproxWithFormula: 0
+  NormalApproxMapLevel: 2
   EdgeLength: 1
-  ComputeMode: 1
+  GeomComputeHeight: 0
   ShowMode: 1024
 --- !u!64 &1393263773
 MeshCollider:
@@ -728,7 +737,7 @@ GameObject:
   - component: {fileID: 2108532815}
   - component: {fileID: 2108532814}
   m_Layer: 0
-  m_Name: LightPosition
+  m_Name: LightInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

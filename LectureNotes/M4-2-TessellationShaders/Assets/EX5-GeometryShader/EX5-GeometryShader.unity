@@ -336,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 772433009}
   m_Layer: 0
-  m_Name: LightPosition
+  m_Name: LightInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,6 +400,7 @@ MonoBehaviour:
   HeightMapStrength: 0.507
   HeightMapLevel: 1
   NormalApproxWithBC: 1
+  NormalApproxWithFormula: 0
   NormalApproxMapLevel: 2
   EdgeLength: 55
   GeomComputeHeight: 0

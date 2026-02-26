@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 1141525817}
   - component: {fileID: 1141525816}
   m_Layer: 0
-  m_Name: LightPosition
+  m_Name: LightInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,11 +362,14 @@ MonoBehaviour:
   HullOffsetAmount: 0.1
   PatchEdge: 1
   PatchInside: 1
+  DomainComputeHeight: 0
   HeightMapStrength: 0.1
+  HeightMapLevel: 1
   NormalApproxWithBC: 1
-  NormalApproxPixelDelta: 3
+  NormalApproxWithFormula: 0
+  NormalApproxMapLevel: 2
   EdgeLength: 55
-  ComputeMode: 1
+  GeomComputeHeight: 0
   ShowMode: 1024
 --- !u!64 &1257196022
 MeshCollider:
