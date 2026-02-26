@@ -23,7 +23,8 @@ float ComputeHeightFormMap(float2 uv) {
 // Page 18 of Jeremy's report: https://drive.google.com/file/d/1b1bIooafvP9nOhcY1uLmUqowbGa6otN3/view
 float3 ApproxNormalWithMap(float2 uv) {
     float du = _MainTex_TexelSize.x * _NormalApproxMapLevel;   // one texel in the map
-    float dv = _MainTex_TexelSize.y * _NormalApproxMapLevel;   // 
+    float dv = _MainTex_TexelSize.y * _NormalApproxMapLevel;   // Was: ... dv = 1/_ScreenHeight 
+                                                               // This is wrong, because the height map is not related to the screen size, but to the texture size.
                 // Does not make sense to perform sampling in relation to the current screen size!!
                 // _TexelSize.zw is the actual number of texels (int)
     float hu1 = ColorToHeight(tex2Dlod(_MainTex, float4(uv + float2(du, 0), 0, _NormalApproxMapLevel))); // height at (u + du, v)
