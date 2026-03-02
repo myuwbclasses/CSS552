@@ -6,6 +6,9 @@ float _HeightMapStrength; // Strength of height map displacement, defined in thi
 int _HeightMapLevel; // Mipmap level to sample from (0: is the base map, e.g., 9, is 2^9 filtered result)
 int _NormalApproxMapLevel; //which level to use for normal
 
+half4 _MainTex_TexelSize; // x = 1/width, y = 1/height, z = width, w = height, defined in TessControlFlags.cginc
+        // this is a unity variable, updated automatically by Unity
+
 float ColorToHeight(float4 c) {
     return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b; // Convert to grayscale using luminosity method
             // https://en.wikipedia.org/wiki/Grayscale#:~:text=Grayscale%20images%2C%20are%20black%2Dand%2Dwhite%20or,to%20white%20at%20the%20strongest.
@@ -18,8 +21,8 @@ float ComputeHeightFormMap(float2 uv) {
 
 // Page 18 of Jeremy's report: https://drive.google.com/file/d/1b1bIooafvP9nOhcY1uLmUqowbGa6otN3/view
 float3 ApproxNormalWithMap(float2 uv) {
-    float du = 1.0 / _ScreenWidth; // from pixel to UV space, defined in TessControlFlags.cginc
-    float dv = 1.0 / _ScreenHeight;
+    float du = _MainTex_TexelSize.x * _NormalApproxMapLevel; // size of the map
+    float dv = _MainTex_TexelSize.y * _NormalApproxMapLevel; // 
     float hu1 = ColorToHeight(tex2Dlod(_MainTex, float4(uv + float2(du, 0), 0, _NormalApproxMapLevel))); // height at (u + du, v)
     float hu2 = ColorToHeight(tex2Dlod(_MainTex, float4(uv - float2(du, 0), 0, _NormalApproxMapLevel))); // height at (u - du, v)
     float hv1 = ColorToHeight(tex2Dlod(_MainTex, float4(uv + float2(0, dv), 0, _NormalApproxMapLevel))); // height at (u, v + dv)

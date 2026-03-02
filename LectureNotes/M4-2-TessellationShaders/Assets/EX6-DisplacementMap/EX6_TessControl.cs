@@ -62,8 +62,8 @@ public class EX6_TessControl : MonoBehaviour {
         mat.SetFloat("_ScreenHeight", Camera.main.pixelHeight);
         
         if (LightType == UseLightType.eDirectionalLight) {
-            mat.SetVector("LightInfo_Pt_Dir", LightInfo_Pt_Dir.up);
+            mat.SetVector("_LightInfo", LightInfo_Pt_Dir.up);
         } else 
-            mat.SetVector("LightInfo_Pt_Dir", LightInfo_Pt_Dir.localPosition);
+            mat.SetVector("_LightInfo", LightInfo_Pt_Dir.localPosition);
 	}
 }
