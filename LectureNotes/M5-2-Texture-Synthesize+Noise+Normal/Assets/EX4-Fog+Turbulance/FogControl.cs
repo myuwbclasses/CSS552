@@ -4,53 +4,59 @@ using UnityEngine;
 
 public class FogControl : MonoBehaviour
 {
-    public float N = 1;
-    public float F = 10;
-    public float FogDensity = 1.0f;
-    public Color FogColor = Color.white;
-    // for debug support
+    public enum FogTypeEnum {
+        UniformFog = 0x01 << 10,
+        PerlinFog = 0x01 << 11,
+        FractalFog = 0x01 << 12
+    };
     public enum DebugShowFlag {
         DebugOff = 0,
-        DebugShowNear = 1,
-        DebugShowBlend = 2
+        DebugShowTau = 0x01 << 1,
+        DebugShowInterval = 0x01 << 2,
+        DebugShowTransmittance = 0x01 << 3,
+        DebugShowFogColor = 0x01 << 4
     };
-    const int kFlipBlend = 0x004;
-    public enum FogTypeEnum {
-        UniformFog = 0x10000,
-        PerlinFog = 0x20000,
-        FractalFog = 0x40000
-    };
-    public FogTypeEnum FogType = FogTypeEnum.UniformFog;
-    public int SamplesInVolume = 1;
-
-    public DebugShowFlag DebugFlag = DebugShowFlag.DebugOff;
-    public bool FlipBlend = false;
     
-    public Material FogMat = null;
-    public DepthCamControl DepthCam = null;
-    void Start()
-    {
+    [Header("Fog Location/Size and Type")]
+    public Transform FogGeom;
+    public FogTypeEnum FogType = FogTypeEnum.UniformFog;
+    
+    [Header("Fog Options")]
+    public Color FogColor = Color.white;    
+    [Range(0.1f, 2f)] public float FogExtinction = 1f;
+    [Range(1f, 10f)] public float FogDropOff = 1f;
+    [Range(0.1f, 2f)] public float FogScattering = 1f;
+        
+    [Header("Debug Options")]
+    public DebugShowFlag DebugFlag = DebugShowFlag.DebugOff;
+    [Header("Configurations")]
+    public Material FogMat; //  UI will set these
+    public DepthCamControl DepthCam; // 
+
+    void Start() {
         Debug.Assert(FogMat != null);
         Debug.Assert(DepthCam != null);
-
         FogMat.SetTexture("_DepthTexture", DepthCam.GetDepthTexture());
     }
 
     void Update() {
+        int f = (int) DebugFlag | (int) FogType;
+        FogMat.SetInteger("_flag", f);
+
+        Camera cam = Camera.main;
+        FogMat.SetVector("_CameraPosition", cam.transform.localPosition);
+        FogMat.SetFloat("_CameraFOV", cam.fieldOfView * Mathf.Deg2Rad);
+        FogMat.SetFloat("_CameraAspect", cam.aspect);
+
+        // Fog Geom
+        FogMat.SetVector("_fogPosition", FogGeom.position);
+        FogMat.SetFloat("_fogRadius", FogGeom.localScale.x * 0.5f);
         // Fog specific
         FogMat.SetColor("_fogColor", FogColor);
-        FogMat.SetFloat("_fogDensity", FogDensity);
-        FogMat.SetFloat("_n", N);
-        FogMat.SetFloat("_f", F);
+        FogMat.SetFloat("_fogExtinction", FogExtinction);
+        FogMat.SetFloat("_fogDropOff", FogDropOff);
+        FogMat.SetFloat("_fogScattering", FogScattering);
 
-        SamplesInVolume = Mathf.Clamp(SamplesInVolume, 1, 31);
-
-        int f = (int) DebugFlag;
-        f |= FlipBlend ? kFlipBlend : 0;
-        f |= (int) FogType;
-        f |= (SamplesInVolume << 4);
-        // Debug.Log("Flag = " + f.ToString("x"));
-        FogMat.SetInteger("_flag", f);
     }
     void OnRenderImage(RenderTexture src, RenderTexture dst) {
         // Graphics.Blit(src, dst);  // simple copying

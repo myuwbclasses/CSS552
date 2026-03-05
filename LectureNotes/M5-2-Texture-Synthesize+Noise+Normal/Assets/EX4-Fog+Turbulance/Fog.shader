@@ -20,6 +20,8 @@ Shader "Unlit/Fog"
             #pragma vertex vert
             #pragma fragment frag
 
+            #include "UnityCG.cginc"
+
            struct appdata
             {
                 float4 vertex : POSITION;
@@ -43,106 +45,118 @@ Shader "Unlit/Fog"
             sampler2D _MainTex;
 
             // Fog specifics
-            float _fogDensity;   // extinction coefficient (or density)
+             float3 _CameraPosition;
+
+            float _invWidth;    // in Normalized space
+            float _invHeight;   // width and height of each pixel
+
+            float3 _fogPosition;
+            float _fogRadius;
+
             float4 _fogColor;
-            float _n, _f;
+            float _fogExtinction;
+            float _fogDropOff;
+            float _fogScattering;
+
             sampler2D _DepthTexture;   // from our own DepthShader
 
             // For fog modes and debugging
             uint _flag;
-            static const int kShowDebugNear = 1;
-            static const int kShowDebugBlend = 2;
-            
-            static const int kFlipBlend = 4;
 
-            static const int kSamplesInVol = 0x800;
-            static const int kSampleCountMask = 0x7F0;
+            static const uint kShowDebugTau = 0x01 << 1;
+            static const uint kShowDebugInterval = 0x01 << 2;
+            static const uint kShowDebugTransmittance = 0x01 << 3;
+            static const uint kShowDebugFogColor = 0x01 << 4;
 
-            static const int kMaxVolSamples = 20;
-            static const int kFogTypeUniform = 0x10000;
-            static const int kFogTypePerlin =  0x20000;
-            static const int kFogTypeFractal = 0x40000;
+            static const int kFogTypeUniform = 0x01 << 10;
+            static const int kFogTypePerlin =  0x01 << 11;
+            static const int kFogTypeFractal = 0x01 << 12;
 
-            #define CHECK_DEBUG(FLAG, DEBUG_ACTION) {   \
-                if (_flag & FLAG)                       \
-                    c1 = DEBUG_ACTION;                  \
+            static const float kVeryFar = 99999;
+
+            #define FLAG_IS_ON(FLAG) (_flag & FLAG)
+
+            #define CONDITION_DEBUG(COND, FLAG, D_COLOR) {  \
+                if (FLAG_IS_ON(FLAG)) {                     \
+                    if (COND) {                             \
+                        return D_COLOR;                     \
+                    }                                       \
+                }                                           \
             }
 
-            int GetSamplesInVol() {
-                return ((kSampleCountMask & _flag) >> 4);
+            #define CHECK_DEBUG(FLAG, DEBUG_COLOR) {        \
+                if (FLAG_IS_ON(FLAG)) {                    \
+                    return DEBUG_COLOR;                     \
+                }                                           \
             }
 
+            #include "./RayFunctions.cginc"
             #include "../EX3-NoiseFunction/PerlinNoise.cginc"
 
-            float Uniform_FogDensity(float3 p, float d) {
-                return exp(-_fogDensity * d);
-            }
+            // uv: for pixel color lookup, must be transformed into NDC: [-1 to 1]
+            // distToEye: distance from the visible object to the fog
+            float4 ComputeFogColor(float2 uv, float distToEye) {
+                float2 pixelCoord = (uv - 0.5) * 2.0;
 
-            float Perlin_FogDensity(float3 p, float d) {
-                return exp(-(0.5*(perlinNoise(p)+1)) * _fogDensity * d);
-            }
+                Ray viewRay;
+                viewRay.origin = getCameraOriginInWorld();
+                viewRay.direction = getPixelRayDirInWorld(pixelCoord);
 
-            float Fractal_FogDensity(float3 p, float d) {
-                return exp(-FractalNoise(p, 6) * _fogDensity * d);
-            }
+                Sphere fogVolume;
+                fogVolume.center = _fogPosition;
+                fogVolume.radius = _fogRadius;
 
-            #define COMPUTE_FOG(TYPE) {                         \
-                for (int i = 0; i < kMaxVolSamples; i++ ) {     \
-                    if (i < s) {                                \
-                        p1 += dir;                              \
-                        blend *= TYPE##_FogDensity(p1, w);      \
-                    }                                           \
-                }                                               \
+                float4 fogColor = float4(0, 0, 0, 1);
+                SphereHit h = raySphereIntersect(viewRay, fogVolume);
+                if (h.hit) {                    
+                    if (h.enter < distToEye) { // ray entered torch before hitting visible object
+                        float transmittance = 1;
+                        float tau = 0;
+                        // Assuming eye is outside of torch
+                        float volInterval = h.exit - h.enter;  // assume nothing in the torch
+                        if (h.exit > distToEye) { // object inside the torch
+                            volInterval = distToEye - h.enter;
+                        }
+                        tau = _fogExtinction * (volInterval / (0.5 * _fogRadius)); // normalize by max possible interval (when ray goes through center of torch)
+
+                        // Mudulate Tau
+                        // Assumption: accumulated Tau for the entire interval is ...
+                        float3 samplePt = viewRay.origin + h.enter * viewRay.direction; // the point where ray enters the fog volume
+                        samplePt -= fogVolume.center; // transform to local space of the torch for noise sampling
+                        
+                        if (FLAG_IS_ON(kFogTypeUniform)) {
+                            tau = smoothstep(0, 1, pow(tau, _fogDropOff)); // smooth step to avoid harsh boundary when ray just touches the torch
+                        } else if (FLAG_IS_ON(kFogTypePerlin)) {
+                            tau *= 0.8 * (perlinNoise(samplePt) + 1) * 0.2; // map perlin noise from [-1, 1] to [0, 1]
+                        } else if (FLAG_IS_ON(kFogTypeFractal)) {
+                            tau *= FractalNoise(samplePt, 6);
+                        }
+
+                        transmittance = exp(-tau);  // Beer-Lambert Law
+                        fogColor.rgb = (1-transmittance) * _fogScattering * _fogColor; // simple model for in-scattering
+                        fogColor.a = transmittance;
+                        
+                        CHECK_DEBUG(kShowDebugTau, float4(tau, tau, tau, 1))
+                        CHECK_DEBUG(kShowDebugInterval, float4(volInterval/(2*_fogRadius), volInterval/(2*_fogRadius), volInterval/(2*_fogRadius), 1))
+                        CHECK_DEBUG(kShowDebugTransmittance, float4(transmittance, transmittance, transmittance, 1))
+                        CHECK_DEBUG(kShowDebugFogColor, fogColor)
+                    }
+                }
+                return fogColor;
             }
 
             float4 frag (v2f fromV) : SV_Target
             {   
-                float4 c1 = tex2D(_MainTex, fromV.uv);
                 float4 x = tex2D(_DepthTexture, fromV.uv);
+                float distToEye = x.a;  // x.a is distance of obj from camera
+                if (distToEye <= 0.0) // seeing background
+                    distToEye = kVeryFar;
 
-                float d = x.a;  //  remember our DepthShader records distance to camera in the alpha channel
+                float4 fogColor = ComputeFogColor(fromV.uv, distToEye);
+                float transmittance = fogColor.a;
 
-                if (d <= 0) {    // this is background
-                    return _fogColor;
-                }
-                                
-                if (d <= _n) {
-                    CHECK_DEBUG(kShowDebugNear, float4(1, 0, 0, 1))
-                    return c1;  
-                }
-
-                if (d > _f)
-                    d = _f;
-                
-                int s = GetSamplesInVol();
-                // split the distance d into s segments
-                float seg = (d-_n) / (float) s;  // size of each segment
-                float w = seg/(_f - _n);  // weight for each integration segment
-
-                float3 dir = normalize(x.xyz - _WorldSpaceCameraPos);              
-                float3 p1 = _WorldSpaceCameraPos + _n * dir;  // this is at _n
-
-                dir *= seg;  // vector of each segment
-                // now, scale the position and size according to (_f - _n) <-- assume this is the world size
-                p1 *= 1/(_f - _n);
-
-                p1 += dir;  // seg-length along view direction into the fog
-
-                float blend = 1;
-                if (_flag & kFogTypePerlin)
-                    COMPUTE_FOG(Perlin)
-                else if (_flag & kFogTypeFractal)
-                        COMPUTE_FOG(Fractal)
-                    else
-                        COMPUTE_FOG(Uniform)
-
-                if (_flag&kFlipBlend) 
-                    c1 = c1 * blend + _fogColor * (1-blend);
-                else
-                    c1 = c1 * (1-blend) + _fogColor * blend;
-                
-                CHECK_DEBUG(kShowDebugBlend, float4(blend, blend, blend, 1))
-
+                float4 c1 = tex2D(_MainTex, fromV.uv);
+                c1 = c1 * transmittance + fogColor;
                 return c1;
             }
             ENDHLSL

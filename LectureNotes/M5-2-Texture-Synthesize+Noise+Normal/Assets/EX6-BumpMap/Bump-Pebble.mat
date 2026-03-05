@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bump
+  m_Name: Bump-Pebble
   m_Shader: {fileID: 4800000, guid: a4939e2a33a82f7408062eca74d23702, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -28,11 +28,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: eec90cc46ee789949a6d07c701561c74, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Bumpiness: 1
+    - _BumpinessU: 0.037
+    - _BumpinessV: 0.041
+    - _ShowFlag: 1032
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
