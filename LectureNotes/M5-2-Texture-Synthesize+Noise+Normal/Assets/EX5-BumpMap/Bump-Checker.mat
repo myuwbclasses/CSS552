@@ -34,9 +34,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Bumpiness: 1
-    - _BumpinessU: 0.063
-    - _BumpinessV: 0.134
-    - _ShowFlag: 1026
+    - _BumpinessU: 0.1
+    - _BumpinessV: 0.1
+    - _ShowFlag: 1032
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
