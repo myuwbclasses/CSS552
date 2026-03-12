@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9692a8b5a6fc5f448e909b2b6b5755b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RT_PostProcess: {fileID: 2100000, guid: 3a9e80279eb52344b84bbfa7810a9917, type: 2}
+  RT_PostProcess: {fileID: 2100000, guid: 5f6ba050b39cf824e8be928779086351, type: 2}
   DebugPostProcess: {fileID: 2100000, guid: f11229b254535784caa7b1b8f2ff22d5, type: 2}
   DebugWithByPass: 0
   PrePassCam: {fileID: 1571868894}
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   RayTracing: 1
   RayTraceShadow: 0
   RayShadowDarkness: 0.3
-  RT_BackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  RT_BackgroundColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   RTDebugShow: 0
   RTMaterialShow: 0
   UseMainCamera: 1
