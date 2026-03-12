@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Bumpiness: 1.62
+    - _Bumpiness: 1
     - _BumpinessU: 1
     - _BumpinessV: 1
     - _ShowFlag: 3080

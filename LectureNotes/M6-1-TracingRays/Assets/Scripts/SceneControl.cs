@@ -22,12 +22,18 @@ public class SceneControl : MonoBehaviour
         eShowRTObjectInRed = 0x01 << 10,
         eShowRTNormal = 0x01 << 11,
         eShowSphereInBlue = 0x01 << 12,
-        eShowOnlySphereReflect = 0x01 << 13,
         eShowTriangleInGreen = 0x01 << 14,
+        eShowOnlySphereReflect = 0x01 << 13,
         eShowOnlyTriangleReflect = 0x01 << 15,
+    }
+
+    public enum RT_MaterialShow
+    {
+        eShowRegular = 0x0,
         eShowAmbient = 0x01 << 16,
         eShowDiffuse = 0x01 << 17,
-        eShowSpecular = 0x01 << 18
+        eShowSpecular = 0x01 << 18,
+        eShowReflectivity = 0x01 << 19
     }
         
 
@@ -39,6 +45,7 @@ public class SceneControl : MonoBehaviour
     [Range(0.05f, 1.0f)] public float RayShadowDarkness = 0.3f;
     public Color RT_BackgroundColor = Color.white;
     public RT_DebugShow RTDebugShow = RT_DebugShow.eShowRegular;
+    public RT_MaterialShow RTMaterialShow = RT_MaterialShow.eShowRegular;
 
     [Header("Phong Material Settings")]
     public bool UseMainCamera = true;
@@ -90,6 +97,7 @@ public class SceneControl : MonoBehaviour
         mode |= (RayTraceShadow) ? kRayTraceShadow : 0;
 
         mode |= (int) RTDebugShow;
+        mode |= (int) RTMaterialShow;
         
         Shader.SetGlobalInt("_ShaderMode", mode);
         // Debug.Log("ShaderMode=" + mode);
